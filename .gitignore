@@ -1,0 +1,10 @@
+.env
+__pycache__
+
+# virtual environment
+venv
+
+db.sqlite3
+celerybeat-schedule
+
+.vscode
