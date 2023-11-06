@@ -1,0 +1,134 @@
+  *, 
+  *::before, 
+  *::after {
+    box-sizing: border-box;
+  }
+
+  * {
+    margin: 0;
+  }
+
+    html, body {
+    height: 100%;
+  }
+
+  body {
+    --base-color: #fff;
+    --text-color: #000;
+    --brand-color: #8AC40E;
+    --dark-brand-color: #72a20b;
+    --light-brand-color: rgba(138, 196, 14, .1);
+    --dark-color: #000;
+    --accent-color: #d76b36;
+    --dark-accent-color: #b55b2e;
+    --indent: 20px;
+    --border-radius: 5px;
+    --card-width: 500px;
+
+
+    line-height: 1.5;
+    font-family: 'Open Sans', sans-serif;
+    background: var(--base-color);
+    color: var(--text-color);
+  }
+
+  img, picture, svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  ul,
+  ol {
+    list-style: none;
+    padding: 0;
+  }
+
+  input, button, textarea, select {
+    font: inherit;
+  }
+
+  p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+  }
+
+  .wrapper {
+    min-height: 100%;
+    display: grid;
+    grid-template-columns:
+      [full-start] 1fr [wrapper-start] minmax(0, 1100px) [wrapper-end] 1fr [full-end];
+    grid-template-rows: auto 1fr auto;
+    column-gap: var(--indent);
+  }
+
+  .wrapper > * {
+    grid-column: wrapper;
+  }
+
+  .wrapper > .full-width {
+    grid-column: full;
+  }
+
+  .wrapper-inner {
+    display: grid;
+    grid-template-columns:
+      1fr [container-start] minmax(0, 1100px) [container-end] 1fr;
+    column-gap: var(--indent);
+  }
+
+  .wrapper-inner > * {
+    grid-column: container;
+  }
+
+  .header,
+  .footer {
+    display: flex;
+    padding-top: calc(var(--indent) * 2);
+    padding-bottom: calc(var(--indent) * 2);
+  }
+
+  .header {
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--indent);
+  }
+
+  .header__logo-img {
+    width: 140px;
+    aspect-ratio: 2.16;
+  }
+
+  .footer-wrapper {
+    background: var(--dark-color);
+    margin-top: calc(var(--indent) * 3);
+  }
+
+  .footer {
+    color: var(--base-color);
+  }
+
+  .header__box {
+    margin-left: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--indent);
+  }
+
+  .nav__items {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: var(--indent);
+  }
+
+  .nav__link {
+    text-decoration: none;
+    color: var(--brand-color);
+    transition: color .3s ease;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .nav__link:hover {
+    color: var(--dark-brand-color);
+  }
+
