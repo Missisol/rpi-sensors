@@ -19,8 +19,8 @@ app.conf.beat_schedule = {
         # 'schedule': crontab(minute='*/5'), 
         'schedule': crontab(minute='*/15'), 
     },
-    'get_dht22_data': { 
-        'task': 'meteo.tasks.get_dht22_data',
+    'get_dht_data': { 
+        'task': 'meteo.tasks.get_dht_data',
         # 'schedule': crontab(), 
         # 'schedule': crontab(minute='*/5'), 
         'schedule': crontab(minute='*/15'), 
@@ -30,8 +30,8 @@ app.conf.beat_schedule = {
         # 'schedule': crontab(), 
         'schedule': crontab(minute=0, hour='*/1'),
     },
-    'get_dht22_history': { 
-        'task': 'meteo.tasks.get_dht22_history',
+    'get_dht_history': { 
+        'task': 'meteo.tasks.get_dht_history',
         # 'schedule': crontab(), 
         'schedule': crontab(minute=0, hour='*/1'),
     },

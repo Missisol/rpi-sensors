@@ -1,13 +1,13 @@
 import board
 import adafruit_dht
 
-from .models import DhtData
+from meteo.models import DhtData
 
 
 class DHT22Module:
   DHT22Sensor = adafruit_dht.DHT22(board.D18, use_pulseio=False)
 
-  def get_dht22_data(self):
+  def get_dht_data(self):
     try:
         # Print the values to the serial port
         tr = self.DHT22Sensor.temperature
