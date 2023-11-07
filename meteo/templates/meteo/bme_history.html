@@ -6,9 +6,9 @@
     <h2>{{ page_obj}}</h2>
     <ul>
     {% for data in object_list %}
-        <li>{{ data.temperature }}</li>
-        <li>{{ data.humidity }}</li>
-        <li>{{ data.pressure }}</li>
+        <li>{{ data.min_temperature }}</li>
+        <li>{{ data.min_humidity }}</li>
+        <li>{{ data.min_pressure }}</li>
     {% endfor %}
     </ul>
 {% else %}
