@@ -2,15 +2,18 @@ from django.urls import include, path
 from rest_framework.urlpatterns import format_suffix_patterns
 
 # from meteo.api import views
-from meteo.api.views import BMEViewSet, BmeHistoryViewSet, DhtDataViewSet, DhtHistoryViewSet
+from meteo.api.views import BmeViewSet, BmeLastViewSet, BmeHistoryViewSet, DhtDataViewSet, DhtHistoryViewSet
 
 
-bme_list = BMEViewSet.as_view({
+bme_list =BmeViewSet.as_view({
     'get': 'list',
 })
-bme_detail = BMEViewSet.as_view({
+bme_detail =BmeViewSet.as_view({
     'get': 'retrieve',
     'delete': 'destroy',
+})
+bme_last_list =BmeLastViewSet.as_view({
+    'get': 'list',
 })
 bme_history_list = BmeHistoryViewSet.as_view({
     'get': 'list',
@@ -40,6 +43,7 @@ urlpatterns = [
   path("api/", include('rest_framework.urls', namespace="api"),),
   path('bme/', bme_list, name='bme-list'),
   path('bme/<int:pk>/', bme_detail, name='bme-detail'),
+  path('bme-last/', bme_last_list, name='bme-last-list'),
   path('bme-history/', bme_history_list, name='bme-history-list'),
   path('bme-history/<int:pk>/', bme_history_detail, name='bme-history-detail'),
   path('dht/', dht_list, name='dht-list'),

@@ -1,17 +1,64 @@
 {% extends 'meteo/base.html' %}
+{% load static %}
+
 
 {% block content %}
 
-{% if object_list %}
-    <h2>{{ page_obj}}</h2>
-    <ul>
-    {% for data in object_list %}
-        <li>{{ data.temperature }}</li>
-        <li>{{ data.humidity }}</li>
-        <li>{{ data.pressure }}</li>
-    {% endfor %}
-    </ul>
-{% else %}
+  {% if object_list %}
+    <section class="section gauge">
+        {% include 'meteo/includes/title.html' with title="Данные BME280" %}
+        <div class="gauge__header">
+          <div class="gauge__title-wrapper">
+            <h2 class="title">Данные на&nbsp;</h2>
+            <span id="local-date" class="title title--date">{{ object_list.0.full_date }}</span>
+          </div>
+          <div id="icon-wrapper">
+            <i class="bx bx-grid-alt gauge__icon"></i>
+            <i class="bx bx-list-ul gauge__icon hidden"></i>
+          </div>
+        </div>
+        <div class="wrapper gauge-wrapper hidden">
+          <div class="gauge__box">
+            <div id="temperature-gauge"></div>
+          </div>
+          <div class="gauge__box">
+            <div id="humidity-gauge"></div>
+          </div>
+          <div class="gauge__box">
+            <div id="pressure-gauge"></div>
+          </div>
+        </div>
+
+        <div class="wrapper box-wrapper visible">
+          <div class="box">
+            <i class="bx bxs-thermometer readings"></i>
+            <div class="box__content">
+              <div class="box__title">Температура, &deg;C</div>
+              <div class="box__data" id="temperature">{{ object_list.0.temperature }}</div>
+            </div>
+          </div>
+          <div class="box">
+            <i class="bx bxs-droplet-half readings readings--two"></i>
+            <div class="box__content">
+              <div class="box__title">Влажность, %</div>
+              <div class="box__data" id="humidity">{{ object_list.0.humidity }}</div>
+            </div>
+          </div>
+          <div class="box">
+            <i class="bx bxs-tachometer readings readings--three"></i>
+            <div class="box__content">
+              <div class="box__title">Давление, мм.рт.ст.</div>
+              <div class="box__data" id="pressure">{{ object_list.0.pressure }}</div>
+            </div>
+          </div>
+        </div>
+      </section>
+  {% else %}
     <p>No data are available.</p>
-{% endif %}
+  {% endif %}
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/main.js' %}" charset="utf-8"></script>
+<script src="{% static 'js/toggle.js' %}" charset="utf-8"></script>
 {% endblock %}

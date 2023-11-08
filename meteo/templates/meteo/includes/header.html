@@ -1,1 +1,11 @@
-<h2>Header</h2>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/header.css' %}">
+
+<header class="header">
+  <nav class="header__nav">
+    <a class="header__link" href="{% url 'bme' %}">Данные BME280</a>
+    <a class="header__link" href="{% url 'bme-history' %}">История BME280</a>
+    <a class="header__link" href="{% url 'dht' %}">Данные DHT22</a>
+    <a class="header__link" href="{% url 'dht-history' %}">История DHT22</a>
+  </nav>
+</header>
