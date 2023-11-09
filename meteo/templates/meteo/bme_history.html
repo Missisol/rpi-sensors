@@ -1,10 +1,11 @@
 {% extends 'meteo/base.html' %}
+{% load static %}
 
 {% block content %}
 
+{% include 'meteo/includes/page_title.html' with title="BME History" %}
 {% if object_list %}
-    <h2>{{ page_obj}}</h2>
-    <ul>
+<ul>
     {% for data in object_list %}
         <li>{{ data.min_temperature }}</li>
         <li>{{ data.min_humidity }}</li>
