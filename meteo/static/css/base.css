@@ -53,20 +53,20 @@
     overflow-wrap: break-word;
   }
 
-  .wrapper {
+  .container {
     min-height: 100%;
     display: grid;
     grid-template-columns:
-      [full-start] 1fr [wrapper-start] minmax(0, 1100px) [wrapper-end] 1fr [full-end];
+      [full-start] 1fr [container-start] minmax(0, 1100px) [container-end] 1fr [full-end];
     grid-template-rows: auto 1fr auto;
     column-gap: var(--gap);
   }
 
-  .wrapper > * {
-    grid-column: wrapper;
+  .container > * {
+    grid-column: container;
   }
 
-  .wrapper > .full-width {
+  .container > .full-width {
     grid-column: full;
   }
 
