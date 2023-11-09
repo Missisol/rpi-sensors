@@ -50,13 +50,14 @@ const gaugeDataArr = [
   },
 ];
 
-// gauge layout
+/* Gauge layout */
 const layout = { 
   width: 300,
   height: 250, 
   margin: { t: 30, b: 30, l: 30, r: 30 },
 };
 
+/* Gauge config */
 const config = {
   responsive: true,
   displayModeBar: false,
@@ -81,7 +82,7 @@ function getGaugePlotly() {
         },
       },
     ];
-    Plotly.newPlot(gaugeDivs[idx], trace, layout, {displayModeBar: false});
+    Plotly.newPlot(gaugeDivs[idx], trace, layout, config);
   })
 };
 
@@ -93,8 +94,10 @@ function updateSensorReadings() {
       const temperature = res.temperature;
       const humidity = res.humidity;
       const pressure = res.pressure;
+      const localDate = new Date(res.full_date).toLocaleString('ru');
 
       updateGauge(temperature, humidity, pressure);
+      updateBoxes(temperature, humidity, pressure, localDate);
     });
 };
 
@@ -112,6 +115,13 @@ function updateGauge(temperature, humidity, pressure) {
   Plotly.update(temperatureGaugeDiv, temperature_update);
   Plotly.update(humidityGaugeDiv, humidity_update);
   Plotly.update(pressureGaugeDiv, pressure_update);
+}
+
+function updateBoxes(temperature, humidity, pressure, localDate) {
+  temperatureDiv.innerHTML = temperature;
+  humidityDiv.innerHTML = humidity;
+  pressureDiv.innerHTML = pressure;
+  dateEl.innerHTML = localDate;
 }
 
 const timer = 30000
