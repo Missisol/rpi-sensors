@@ -9,6 +9,11 @@ const humidityGaugeDiv = document.getElementById("humidity-gauge");
 const pressureGaugeDiv = document.getElementById("pressure-gauge");
 const gaugeDivs = [temperatureGaugeDiv, humidityGaugeDiv, pressureGaugeDiv] 
 
+const temperatureHistoryDiv = document.getElementById("temperature-chart");
+const humidityHistoryDiv = document.getElementById("humidity-chart");
+const pressureHistoryDiv = document.getElementById("pressure-chart");
+const historyDivs = [temperatureHistoryDiv, humidityHistoryDiv, pressureHistoryDiv]
+
 const gaugeDataArr = [
   { 
     name: 'temperature', 
@@ -124,6 +129,80 @@ function updateBoxes(temperature, humidity, pressure, localDate) {
   dateEl.innerHTML = localDate;
 }
 
+const historyDataArr = [
+  { name: 'temperature', text: 'Температура', colorway: '3ba639' },
+  { name: 'humidity', text: 'Влажность', colorway: '047df3' },
+  { name: 'pressure', text: 'Давление', colorway: '595959'},
+];
+
+function getHystoryPlotly() {
+  historyDataArr.forEach((data, idx) => {
+    const trace = {
+      x: [],
+      y: [],
+      name: data.name,
+      mode: "lines+markers",
+      type: "line",
+    };
+    const layout = {
+      height: 300,
+      title: {
+        text: data.text,
+      },
+      font: {
+        size: 14,
+        color: "#808080",
+      },
+      colorway: [data.colorway],
+    };
+    Plotly.newPlot(historyDivs[idx], [trace], layout, config);
+  })
+};
+
+function getDataForLineChart(dataArr, field) {
+  return dataArr.map(item => item[field])
+}
+
+function updateLastData() {
+  let datesArr;
+  let temperatureArr;
+  let humidityArr;
+  let pressureArr;
+  fetch('/api/bme/')
+    .then((res) => res.json())
+    .then((jsonRes) => {
+      const res = jsonRes.results
+      datesArr = getDataForLineChart(res, 'full_date');
+      temperatureArr = getDataForLineChart(res, 'temperature');
+      humidityArr = getDataForLineChart(res, 'humidity');
+      pressureArr = getDataForLineChart(res, 'pressure');
+
+      updateCharts(
+        datesArr,
+        temperatureArr,
+        temperatureHistoryDiv,
+      );
+      updateCharts(
+        datesArr,
+        humidityArr,
+        humidityHistoryDiv,
+      );
+      updateCharts(
+        datesArr,
+        pressureArr,
+        pressureHistoryDiv,
+      );
+  })
+}
+
+function updateCharts(xArray, yArray, historyDiv) {
+  const data_update = {
+    x: [xArray],
+    y: [yArray],
+  };
+    Plotly.update(historyDiv, data_update);
+}
+
 const timer = 30000
 // const timer = 60 * 1000 * 5
 // const timer = 60 * 1000 * 15 // every 15 minutes
@@ -131,6 +210,7 @@ const timer = 30000
 function loop() {
   setTimeout(() => {
     updateSensorReadings();
+    updateLastData();
     loop();
   }, timer);
 }
@@ -138,5 +218,7 @@ function loop() {
 (function init() {
   getGaugePlotly();
   updateSensorReadings();
+  getHystoryPlotly();
+  updateLastData();
   loop();
 })();
