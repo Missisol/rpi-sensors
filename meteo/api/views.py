@@ -28,11 +28,19 @@ class BmeHistoryViewSet(viewsets.ModelViewSet):
     serializer_class = BmeHistorySerializer
 
 
-class DhtDataViewSet(viewsets.ModelViewSet):
+class DhtViewSet(viewsets.ModelViewSet):
     """
     This ViewSet automatically provides `list`, `create`, `retrieve`, `update` and `destroy` actions.
     """
     queryset = DhtData.objects.all().order_by('-id')
+    serializer_class = DhtDataSerializer
+
+
+class DhtLastViewSet(viewsets.ModelViewSet):
+    """
+    This ViewSet automatically provides `list`, `create`, `retrieve`, `update` and `destroy` actions.
+    """
+    queryset = DhtData.objects.all().order_by('-id')[:1]
     serializer_class = DhtDataSerializer
 
 
