@@ -161,7 +161,7 @@ function getHystoryPlotly() {
 
 function getDataForLineChart(dataArr, field) {
   return dataArr.map(item => item[field])
-}
+};
 
 function updateLastData() {
   let datesArr;
