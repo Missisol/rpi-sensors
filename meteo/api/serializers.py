@@ -18,7 +18,7 @@ class BmeHistorySerializer(serializers.HyperlinkedModelSerializer):
 class DhtDataSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = DhtData
-        fields = ['id', 'temperature', 'humidity', 'date']
+        fields = ['id', 'temperature', 'humidity', 'full_date', 'date']
 
 
 class DhtHistorySerializer(serializers.HyperlinkedModelSerializer):

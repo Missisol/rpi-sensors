@@ -2,17 +2,14 @@ const dateEl = document.querySelector('#local-date')
 
 const temperatureDiv = document.getElementById("temperature");
 const humidityDiv = document.getElementById("humidity");
-const pressureDiv = document.getElementById("pressure");
 
 const temperatureGaugeDiv = document.getElementById("temperature-gauge");
 const humidityGaugeDiv = document.getElementById("humidity-gauge");
-const pressureGaugeDiv = document.getElementById("pressure-gauge");
-const gaugeDivs = [temperatureGaugeDiv, humidityGaugeDiv, pressureGaugeDiv] 
+const gaugeDivs = [temperatureGaugeDiv, humidityGaugeDiv] 
 
 const temperatureHistoryDiv = document.getElementById("temperature-chart");
 const humidityHistoryDiv = document.getElementById("humidity-chart");
-const pressureHistoryDiv = document.getElementById("pressure-chart");
-const historyDivs = [temperatureHistoryDiv, humidityHistoryDiv, pressureHistoryDiv]
+const historyDivs = [temperatureHistoryDiv, humidityHistoryDiv]
 
 const gaugeDataArr = [
   { 
@@ -40,18 +37,6 @@ const gaugeDataArr = [
       { range: [60, 100], color: "#70b0ef" },
     ],
     value: 70,
-  },
-  { 
-    name: 'pressure', 
-    text: 'Давление, мм.рт.ст.', 
-    reference: 748,
-    range: [700, 800],
-    color: "#808080",
-    steps: [
-      { range: [700, 748], color: "#fff" },
-      { range: [748, 800], color: "#cecece" },
-    ],
-    value: 760,
   },
 ];
 
@@ -92,47 +77,40 @@ function getGaugePlotly() {
 };
 
 function updateSensorReadings() {
-  fetch(`/api/bme-last/`)
+  fetch(`/api/dht-last/`)
     .then((response) => response.json())
     .then((jsonResponse) => {
       const res = jsonResponse.results[0]
       const temperature = res.temperature;
       const humidity = res.humidity;
-      const pressure = res.pressure;
       const localDate = new Date(res.full_date).toLocaleString('ru');
 
-      updateGauge(temperature, humidity, pressure);
-      updateBoxes(temperature, humidity, pressure, localDate);
+      updateGauge(temperature, humidity);
+      updateBoxes(temperature, humidity, localDate);
     });
 };
 
-function updateGauge(temperature, humidity, pressure) {
+function updateGauge(temperature, humidity) {
   const temperature_update = {
     value: temperature,
   };
   const humidity_update = {
     value: humidity,
   };
-  const pressure_update = {
-    value: pressure,
-  };
 
   Plotly.update(temperatureGaugeDiv, temperature_update);
   Plotly.update(humidityGaugeDiv, humidity_update);
-  Plotly.update(pressureGaugeDiv, pressure_update);
 }
 
-function updateBoxes(temperature, humidity, pressure, localDate) {
+function updateBoxes(temperature, humidity, localDate) {
   temperatureDiv.innerHTML = temperature;
   humidityDiv.innerHTML = humidity;
-  pressureDiv.innerHTML = pressure;
   dateEl.innerHTML = localDate;
 }
 
 const historyDataArr = [
   { name: 'temperature', text: 'Температура', colorway: '3ba639' },
   { name: 'humidity', text: 'Влажность', colorway: '047df3' },
-  { name: 'pressure', text: 'Давление', colorway: '595959'},
 ];
 
 function getHystoryPlotly() {
@@ -167,15 +145,13 @@ function updateLastData() {
   let datesArr;
   let temperatureArr;
   let humidityArr;
-  let pressureArr;
-  fetch('/api/bme/')
+  fetch('/api/dht/')
     .then((res) => res.json())
     .then((jsonRes) => {
       const res = jsonRes.results
       datesArr = getDataForLineChart(res, 'full_date');
       temperatureArr = getDataForLineChart(res, 'temperature');
       humidityArr = getDataForLineChart(res, 'humidity');
-      pressureArr = getDataForLineChart(res, 'pressure');
 
       updateCharts(
         datesArr,
@@ -187,13 +163,8 @@ function updateLastData() {
         humidityArr,
         humidityHistoryDiv,
       );
-      updateCharts(
-        datesArr,
-        pressureArr,
-        pressureHistoryDiv,
-      );
   })
-}
+};
 
 function updateCharts(xArray, yArray, historyDiv) {
   const data_update = {

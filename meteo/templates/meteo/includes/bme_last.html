@@ -1,0 +1,53 @@
+<section class="section gauge">
+  {% if object_list %}
+    <div class="gauge__header">
+      <div class="gauge__title-wrapper">
+        <h2 class="title">
+          Данные на&nbsp;
+          <span id="local-date" class="title title--date"></span>
+        </h2>
+      </div>
+      <div id="icon-wrapper">
+        <i class="bx bx-grid-alt gauge__icon"></i>
+        <i class="bx bx-list-ul gauge__icon hidden"></i>
+      </div>
+    </div>
+    <div class="wrapper gauge-wrapper hidden">
+      <div class="gauge__box">
+        <div id="temperature-gauge"></div>
+      </div>
+      <div class="gauge__box">
+        <div id="humidity-gauge"></div>
+      </div>
+      <div class="gauge__box">
+        <div id="pressure-gauge"></div>
+      </div>
+    </div>
+
+    <div class="wrapper box-wrapper visible">
+      <div class="box">
+        <i class="bx bxs-thermometer readings"></i>
+        <div class="box__content">
+          <div class="box__title">Температура, &deg;C</div>
+          <div class="box__data" id="temperature"></div>
+        </div>
+      </div>
+      <div class="box">
+        <i class="bx bxs-droplet-half readings readings--two"></i>
+        <div class="box__content">
+          <div class="box__title">Влажность, %</div>
+          <div class="box__data" id="humidity"></div>
+        </div>
+      </div>
+      <div class="box">
+        <i class="bx bxs-tachometer readings readings--three"></i>
+        <div class="box__content">
+          <div class="box__title">Давление, мм.рт.ст.</div>
+          <div class="box__data" id="pressure"></div>
+        </div>
+      </div>
+    </div>
+    {% else %}
+      <p>No data are available.</p>
+    {% endif %}
+  </section>

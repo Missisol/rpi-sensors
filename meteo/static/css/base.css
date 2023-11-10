@@ -29,7 +29,7 @@
   
 
     line-height: 1.5;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
     background: var(--base-color);
     color: var(--base-grey-color);
   }
@@ -53,96 +53,50 @@
     overflow-wrap: break-word;
   }
 
-  .container {
-    min-height: 100%;
-    display: grid;
-    grid-template-columns:
-      [full-start] 1fr [container-start] minmax(0, 1100px) [container-end] 1fr [full-end];
-    grid-template-rows: auto 1fr auto;
-    column-gap: var(--gap);
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Rubik', sans-serif;
   }
 
-  .container > * {
-    grid-column: container;
-  }
+.container {
+  min-height: 100%;
+  display: grid;
+  grid-template-columns:
+    [full-start] 1fr [container-start] minmax(0, 1100px) [container-end] 1fr [full-end];
+  grid-template-rows: auto 1fr auto;
+  column-gap: var(--gap);
+}
 
-  .container > .full-width {
-    grid-column: full;
-  }
+.container > * {
+  grid-column: container;
+}
 
-  .wrapper-inner {
-    display: grid;
-    grid-template-columns:
-      1fr [container-start] minmax(0, 1100px) [container-end] 1fr;
-    column-gap: var(--gap);
-  }
+.container > .full-width {
+  grid-column: full;
+}
 
-  .wrapper-inner > * {
-    grid-column: container;
-  }
+.wrapper-inner {
+  display: grid;
+  grid-template-columns:
+    1fr [container-start] minmax(0, 1100px) [container-end] 1fr;
+  column-gap: var(--gap);
+}
+
+.wrapper-inner > * {
+  grid-column: container;
+}
 
 /* title */
 .page-title {
   color: var(--base-blue-color);
   font-size: 1.5rem;
-}
-
-
-/* Gauge styles */
-.gauge__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
   margin-bottom: var(--gap);
 }
 
-.title--date {
-  font-size: 22px;
+.title {
+  font-weight: 400;
 }
 
-#icon-wrapper {
-  cursor: pointer;
+.delimiter {
+  height: 1px;
+  background: var(--light-grey-color);
 }
-
-.gauge__icon {
-  font-size: 30px;
-  color: var(--base-blue-color);
-}
-
-
-.gauge-wrapper,
-.box-wrapper {
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-.visible {
-  display: flex;
-}
-
-.hidden {
-  display: none;
-}
-
-.box {
-  flex-basis: 300px;
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  font-size: 20px;
-}
-
-.readings {
-  font-size: 30px;
-  color: var(--base-green-color);
-}
-
-.readings--two {
-  color: var(--base-blue-color);
-}
-
-.readings--three {
-  color: var(--base-grey-color);
-}
-
