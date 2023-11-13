@@ -1,15 +1,23 @@
 from rest_framework import viewsets
 
 from meteo.models import BmeData, BmeHistory, DhtData, DhtHistory
-from .serializers import BMESerializer, BmeHistorySerializer, DhtDataSerializer, DhtHistorySerializer
+from .serializers import BmeSerializer, BmeHistorySerializer, DhtDataSerializer, DhtHistorySerializer
 
 
-class BMEViewSet(viewsets.ModelViewSet):
+class BmeViewSet(viewsets.ModelViewSet):
     """
     This ViewSet automatically provides `list`, `create`, `retrieve`, `update` and `destroy` actions.
     """
     queryset = BmeData.objects.all().order_by('-id')
-    serializer_class = BMESerializer
+    serializer_class = BmeSerializer
+
+
+class BmeLastViewSet(viewsets.ModelViewSet):
+    """
+    This ViewSet automatically provides `list`, `create`, `retrieve`, `update` and `destroy` actions.
+    """
+    queryset = BmeData.objects.all().order_by('-id')[:1]
+    serializer_class = BmeSerializer
 
 
 class BmeHistoryViewSet(viewsets.ModelViewSet):
@@ -20,11 +28,19 @@ class BmeHistoryViewSet(viewsets.ModelViewSet):
     serializer_class = BmeHistorySerializer
 
 
-class DhtDataViewSet(viewsets.ModelViewSet):
+class DhtViewSet(viewsets.ModelViewSet):
     """
     This ViewSet automatically provides `list`, `create`, `retrieve`, `update` and `destroy` actions.
     """
     queryset = DhtData.objects.all().order_by('-id')
+    serializer_class = DhtDataSerializer
+
+
+class DhtLastViewSet(viewsets.ModelViewSet):
+    """
+    This ViewSet automatically provides `list`, `create`, `retrieve`, `update` and `destroy` actions.
+    """
+    queryset = DhtData.objects.all().order_by('-id')[:1]
     serializer_class = DhtDataSerializer
 
 

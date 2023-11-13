@@ -7,8 +7,8 @@ from meteo.views.dht_history import DhtHistoryView
 
 urlpatterns = [
   path("api/", include("meteo.api.api_urls")),
-  path("bme/", BmeDataView.as_view()),
-  path("bme-history/", BmeHistoryView.as_view()),
-  path("dht/", DhtDataView.as_view()),
-  path("dht-history/", DhtHistoryView.as_view()),
+  path("bme/", BmeDataView.as_view(), name="bme"),
+  path("bme-history/", BmeHistoryView.as_view(), name="bme-history"),
+  path("dht/", DhtDataView.as_view(), name="dht"),
+  path("dht-history/", DhtHistoryView.as_view(), name="dht-history"),
 ]

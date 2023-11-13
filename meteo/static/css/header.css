@@ -1,0 +1,27 @@
+.header {
+  display: flex;
+}
+
+.header__nav {
+  margin-left: auto;
+}
+
+.header__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--gap) * 2);
+  padding: var(--gap) 0;
+}
+
+.header__link {
+  text-decoration: none;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 500;
+  color: var(--base-grey-color);
+}
+
+.header__link:hover,
+.header__link--active {
+  color: var(--base-blue-color);
+}
+
