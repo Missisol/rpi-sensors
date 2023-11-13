@@ -4,14 +4,14 @@
   - <https://www.donskytech.com/raspberry-pi-bme280-weather-station-using-python-and-flask/>
   - Необходимые пакеты:  
   <https://pypi.org/project/RPi.bme280/>    
-  ![Распиновка](./static/images/pin-outs.png)
+  ![Распиновка](./readme-images/pin-outs.png)
 
 
 ### Датчик DHT22
  - Необходимые пакеты:  
  <https://learn.adafruit.com/dht-humidity-sensing-on-raspberry-pi-with-gdocs-logging/python-setup>
  - `sudo apt-get install libgpiod2`  
-  ![Распиновка](./static/images/pin-outs_1.png)
+  ![Распиновка](./readme-images/pin-outs_1.png)
 
 <br>
 <hr>
