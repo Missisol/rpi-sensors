@@ -9,7 +9,7 @@
 .header__links {
   display: flex;
   flex-wrap: wrap;
-  gap: calc(var(--gap) * 2);
+  column-gap: calc(var(--gap) * 2);
   padding: var(--gap) 0;
 }
 
