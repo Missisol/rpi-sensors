@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import environ
 from pathlib import Path
 
+from .ip_address import get_ip_address
+import sys
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -28,7 +31,13 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG', default=False)
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['192.168.1.122'])
+# How to view a django project across other devices from your local computer - https://dev.to/codewitgabi/how-to-view-a-django-project-across-other-devices-from-your-local-computer-43eg
+ALLOWED_HOSTS = ["127.0.0.1", get_ip_address()]
+CSRF_TRUSTED_ORIGINS = [f"http://{get_ip_address()}"]
+
+sys.stdout.write(f"IP address: http://{get_ip_address()}\n") # get the ip address from the command line.
+
+# ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['192.168.1.122'])
 
 
 # Application definition
