@@ -5,7 +5,7 @@ import math
 from pytz import timezone
 import pytz
 
-from .models import BmeData
+from meteo.models import BmeData
 
 
 class BME280Module:

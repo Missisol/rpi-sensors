@@ -1,1 +1,37 @@
-<h2>Header</h2>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/header.css' %}">
+
+<header class="header">
+  <nav class="header__nav">
+    <ul class="header__links">
+      <li>
+        {% if request.path == '/bme/' %}
+          <a class="header__link header__link--active" href="{% url 'bme' %}">Данные BME280</a>
+        {% else %}
+          <a class="header__link" href="{% url 'bme' %}">Данные BME280</a>
+        {% endif %}
+      </li>
+      <li>
+        {% if request.path == '/bme-history/' %}
+          <a class="header__link header__link--active" href="{% url 'bme-history' %}">История BME280</a>
+        {% else %}
+          <a class="header__link" href="{% url 'bme-history' %}">История BME280</a>
+        {% endif %}
+      </li>
+      <li>
+        {% if request.path == '/dht/' %}
+          <a class="header__link header__link--active" href="{% url 'dht' %}">Данные DHT22</a>
+        {% else %}
+          <a class="header__link" href="{% url 'dht' %}">Данные DHT22</a>
+        {% endif %}
+      </li>
+      <li>
+        {% if request.path == '/dht-history/' %}
+          <a class="header__link header__link--active" href="{% url 'dht-history' %}">История DHT22</a>
+        {% else %}
+          <a class="header__link" href="{% url 'dht-history' %}">История DHT22</a>
+        {% endif %}
+      </li>
+    </ul>
+  </nav>
+</header>

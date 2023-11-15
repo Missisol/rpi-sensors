@@ -6,7 +6,7 @@ from meteo.models import BmeData
 
 class BmeDataView(ListView):
     template_name = "meteo/bme_data.html"
-    queryset = BmeData.objects.order_by("-id")[:10]
+    queryset = BmeData.objects.order_by("-id")
     context_object_name = "bme_data"
 
         

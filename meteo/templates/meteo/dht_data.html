@@ -1,0 +1,18 @@
+{% extends 'meteo/base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/data.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% include 'meteo/includes/page_title.html' with title="DHT22" %}
+    {% include 'meteo/includes/dht_last.html' %}
+    <div class="delimiter"></div>
+    {% include 'meteo/includes/sensor_dynamic.html' %}
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/dht_data.js' %}" charset="utf-8"></script>
+    <script src="{% static 'js/toggle.js' %}" charset="utf-8"></script>
+{% endblock %}
