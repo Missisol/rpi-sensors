@@ -9,4 +9,4 @@ celerybeat-schedule
 
 .vscode
 
-static/
+/static/
