@@ -73,7 +73,8 @@
 # Запуск проекта
 ## Development
 - Запустить dev сервер:  
-`python manage.py runserver`
+<https://dev.to/codewitgabi/how-to-view-a-django-project-across-other-devices-from-your-local-computer-43eg>  
+`python manage.py runserver 0.0.0.0:8000`
 - Запустить воркер:  
 `celery -A <name_of_project> worker -l info`
 - Запустить beat:  
