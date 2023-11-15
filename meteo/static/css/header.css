@@ -1,5 +1,6 @@
 .header {
   display: flex;
+  padding: var(--gap) 0;
 }
 
 .header__nav {
@@ -10,6 +11,7 @@
   display: flex;
   flex-wrap: wrap;
   column-gap: calc(var(--gap) * 2);
+  row-gap: var(--gap);
   padding: var(--gap) 0;
 }
 
