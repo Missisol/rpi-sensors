@@ -48,6 +48,10 @@ function getDeltaPlotly() {
         size: 14,
         color: "#808080",
       },
+      legend: {
+        x: 0,
+        y: -1.5,
+      }
     };
   
     Plotly.newPlot(deltaDivs[idx], traces, layout, config)
