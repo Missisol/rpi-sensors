@@ -1,6 +1,16 @@
 {% extends 'meteo/base.html' %}
 {% load static %}
 
+{% block title %}
+  <title>
+    {% if DEBUG %}
+      BME history test
+    {% else %}
+      BME history
+    {% endif %}
+  </title>
+{% endblock %} 
+
 {% block styles %}
 <link rel="stylesheet" href="{% static 'css/history.css' %}">
 {% endblock %}

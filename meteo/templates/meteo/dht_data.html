@@ -1,6 +1,17 @@
 {% extends 'meteo/base.html' %}
 {% load static %}
 
+{% block title %}
+  <title>
+    {% if DEBUG %}
+      DHT data test
+    {% else %}
+      DHT data
+    {% endif %}
+  </title>
+{% endblock %} 
+
+
 {% block styles %}
 <link rel="stylesheet" href="{% static 'css/data.css' %}">
 {% endblock %}
