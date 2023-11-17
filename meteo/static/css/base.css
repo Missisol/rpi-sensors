@@ -12,7 +12,10 @@
     height: 100%;
   }
 
-  body {
+  :root {
+    /* Для сответствия цвета контролов цветовой схеме браузера или системы*/
+    /* color-scheme: light dark; */ 
+
     --base-color: #fff;
     --base-grey-color: #595959;
     --medium-grey-color: #808080;
@@ -26,13 +29,21 @@
     --light-red-color: #ef7985;
 
     --gap: 1rem;
-  
+  }
 
+  body {
     line-height: 1.5;
     font-family: 'Roboto', sans-serif;
     background: var(--base-color);
     color: var(--base-grey-color);
   }
+
+  /* @media (prefers-color-scheme: dark) {
+    body { 
+      background: #191919;
+    }
+  }
+  */
 
   img, picture, svg {
     display: block;
