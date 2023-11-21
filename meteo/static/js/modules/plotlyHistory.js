@@ -1,41 +1,17 @@
-const bmeFields = {
-  temperature: ['min_temperature', 'max_temperature'],
-  humidity: ['min_humidity', 'max_humidity'],
-  pressure: ['min_pressure', 'max_pressure'],
-};
+import { config, lineChartDataArr, getFields, getFilteredDataArr} from './commonData.js';
 
-const dhtFields = {
-  temperature: ['min_temperature', 'max_temperature'],
-  humidity: ['min_humidity', 'max_humidity'],
-};
+function getProcessedFields(str) {
+  let obj = {};
+  const arr = getFields(str);
+  arr.forEach((field) => {
+    obj[field] = [`min_${field}`, `max_${field}`];
+  })
 
-const config = {
-  responsive: true,
-  displayModeBar: false,
-};
-
-const colorway = {
-  temperature: '#3ba639', 
-  humidity: '#047df3',
-  pressure: '#3d3c3c',
-};
-
-const getFields = (str) => {
-  return str === 'bme' ? bmeFields : dhtFields;
-};
-
-const deltaDataArr = [
-  { name: 'temperature', legend: 'температура', text: 'Температура', color: '#3ba639' },
-  { name: 'humidity', legend: 'влажность', text: 'Влажность', color: '#047df3' },
-  { name: 'pressure', legend: 'давление', text: 'Давление', color: '#3d3c3c'},
-];
-
-const getDataArr = (fields) => {
-  return deltaDataArr.filter((data) => fields.some((el) => data.name === el ))
+  return obj;
 };
 
 function getDeltaPlotly(fields, divs) {
-  const dataArr = getDataArr(fields)
+  const dataArr = getFilteredDataArr(fields, lineChartDataArr)
   dataArr.forEach((data, idx) => {
     const trace1 = {
       x: [],
@@ -43,7 +19,7 @@ function getDeltaPlotly(fields, divs) {
       name: `min ${data.legend}`,
       mode: "lines+markers",
       line: {
-        dash: 'dot'
+        dash: 'dot',
       },
     };
     const trace2 = {
@@ -66,22 +42,12 @@ function getDeltaPlotly(fields, divs) {
       legend: {
         x: 0,
         y: -1,
-      }
+      },
+      colorway: [data.color],
     };
   
     Plotly.newPlot(divs[idx], traces, layout, config);
   });
 };
 
-function getDataForLineChart(dataArr, field) {
-  return dataArr.map(item => item[field])
-};
-
-function getDivs(selector) {
-  const divs = [];
-  const nodeEls = document.querySelectorAll(selector);
-  nodeEls.forEach((el) => divs.push(el));
-  return divs;
-};
-
-export { colorway, getFields, getDeltaPlotly, getDataForLineChart, getDivs }
+export { getProcessedFields, getDeltaPlotly }
