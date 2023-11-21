@@ -1,4 +1,5 @@
-import { getFields, getDivs, getGaugePlotly, getHystoryPlotly, getDataForLineChart } from './modules/plotlyData.js'
+import { getGaugePlotly, getHystoryPlotly } from './modules/plotlyData.js'
+import { timer, getDataForLineChart, getDivs, getFields } from './modules/commonData.js'
 
 const pathname = document.location.pathname.slice(1, -1);
 const fields = getFields(pathname);
@@ -61,10 +62,6 @@ function updateCharts(xArray, yArray, historyDiv) {
   };
     Plotly.update(historyDiv, data_update);
 }
-
-const timer = 30000
-// const timer = 60 * 1000 * 5
-// const timer = 60 * 1000 * 15 // every 15 minutes
 
 function loop() {
   setTimeout(() => {

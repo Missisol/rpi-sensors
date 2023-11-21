@@ -1,14 +1,4 @@
-const bmeFields = ['temperature', 'humidity', 'pressure']
-const dhtFields = ['temperature', 'humidity']
-
-const getFields = (str) => {
-  return str === 'bme' ? bmeFields : dhtFields;
-};
-
-const config = {
-  responsive: true,
-  displayModeBar: false,
-};
+import { config, lineChartDataArr, getFilteredDataArr } from './commonData.js';
 
 /* Gauge layout */
 const layout = { 
@@ -58,18 +48,12 @@ const gaugeDataArr = [
   },
 ];
 
-const historyDataArr = [
-  { name: 'temperature', text: 'Температура', colorway: '3ba639' },
-  { name: 'humidity', text: 'Влажность', colorway: '047df3' },
-  { name: 'pressure', text: 'Давление', colorway: '595959'},
-];
-
 function getDataArr(fields, plotArrName) {
   const dataArr = plotArrName === 'gaugeDataArr'
     ?  gaugeDataArr 
-    :  historyDataArr
+    :  lineChartDataArr
 
-  return dataArr.filter((data) => fields.some((el) => data.name === el ))
+  return getFilteredDataArr(fields, dataArr)
 };
 
 function getGaugePlotly(fields, divs) {
@@ -108,7 +92,7 @@ function getHystoryPlotly(fields, divs) {
       mode: "lines+markers",
       type: "line",
     };
-    const historyLayout = {
+    const layout = {
       height: 300,
       title: {
         text: data.text,
@@ -117,21 +101,10 @@ function getHystoryPlotly(fields, divs) {
         size: 14,
         color: "#808080",
       },
-      colorway: [data.colorway],
+      colorway: [data.color],
     };
-    Plotly.newPlot(divs[idx], [trace], historyLayout, config);
+    Plotly.newPlot(divs[idx], [trace], layout, config);
   })
 };
 
-function getDataForLineChart(dataArr, field) {
-  return dataArr.map(item => item[field]);
-};
-
-function getDivs(selector) {
-  const divs = [];
-  const nodeEls = document.querySelectorAll(selector);
-  nodeEls.forEach((el) => divs.push(el));
-  return divs;
-};
-
-export { getFields, getDivs, getGaugePlotly, getHystoryPlotly, getDataForLineChart }
+export { getGaugePlotly, getHystoryPlotly }

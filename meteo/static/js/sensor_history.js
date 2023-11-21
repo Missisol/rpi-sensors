@@ -1,10 +1,10 @@
-import { colorway, getFields, getDeltaPlotly, getDataForLineChart, getDivs } from './modules/plotlyHistory.js'
+import { getProcessedFields, getDeltaPlotly } from './modules/plotlyHistory.js';
+import { timer, getDataForLineChart, getDivs } from './modules/commonData.js';
 
 const pathname = document.location.pathname.slice(1, 4);
-const fields = getFields(pathname)
+const fields = getProcessedFields(pathname);
 
 function updateDelta() {
-
   fetch(`/api/${pathname}-history/`)
     .then((res) => res.json())
     .then((jsonRes) => {
@@ -22,15 +22,10 @@ function updateDelta() {
             x: [datesArr],
             y,
           },
-        {colorway: [colorway[key]]},
         )
-      }
+      };
   })
 };
-
-const timer = 30000
-// const timer = 60 * 1000 * 5
-// const timer = 60 * 1000 * 15 // every 15 minutes
 
 function loop() {
   setTimeout(() => {
