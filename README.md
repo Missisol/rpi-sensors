@@ -107,7 +107,7 @@ celery -A config beat -l info
             </Files>
       </Directory>
 
-      WSGIDaemonProcess django python-home=/var/www/html/rpi-sensors/venv python-path=/var/www/html/rpi-s>
+      WSGIDaemonProcess django python-home=/var/www/html/rpi-sensors/venv python-path=/var/www/html/rpi-sensors
       WSGIProcessGroup django
       WSGIScriptAlias / /var/www/html/rpi-sensors/config/wsgi.py 
   ```
