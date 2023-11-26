@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import ListView
 
 from meteo.models import BmeData, DhtData
-from meteo.modules.sensor_data import bme_data_list
+from meteo.utils.sensor_data import bme_data_list
 
 
 class BmeDataView(ListView):
