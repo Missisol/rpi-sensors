@@ -85,6 +85,12 @@ celery -A config beat -l info
 ```
 
 ## Production
+### Обслуживание статических файлов на продакшн сервере 
+<https://docs.djangoproject.com/en/4.2/howto/static-files/#deployment>
+
+`
+python manage.py collectstatic
+`
 ### Настройка деплоя с wsgi_mod  
 <https://docs.djangoproject.com/en/4.2/howto/static-files/#deployment>  
 <https://docs.djangoproject.com/en/4.2/howto/deployment/wsgi/modwsgi/>
@@ -220,12 +226,3 @@ sudo systemctl enable celerybeat.service
 ```
 
 <https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units-ru>
-
-
-
-#### Обслуживание статических файлов на продакшн сервере 
-<https://docs.djangoproject.com/en/4.2/howto/static-files/#deployment>
-
-`
-python manage.py collectstatic
-`
