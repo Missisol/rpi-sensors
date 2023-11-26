@@ -106,6 +106,8 @@ else:
 CELERY_BROKER_URL = "amqp://localhost"
 CELERY_BROKER_CONNECTION_RETRY = True
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+CELERY_ENABLE_UTC = False
+CELERY_TIMEZONE = 'Europe/Moscow'
 
 
 # Password validation
@@ -154,6 +156,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ORIGIN_ALLOW_ALL = True
 SECURE_CROSS_ORIGIN_OPENER_POLICY = 'unsafe-none'
 SECURE_REFERRER_POLICY = 'no-referrer'
+
+CSRF_TRUSTED_ORIGINS = ['http://192.168.1.122']
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
