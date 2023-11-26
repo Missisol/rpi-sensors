@@ -129,7 +129,7 @@ CELERYD_NODES="w1"
 
 CELERY_BIN="/var/www/html/rpi-sensors/venv/bin/celery"
 
-CELERY_APP="smart"
+CELERY_APP="config"
 
 CELERYD_MULTI="multi"
 
