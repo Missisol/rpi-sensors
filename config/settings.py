@@ -35,7 +35,8 @@ DEBUG = env('DEBUG', default=False)
 ALLOWED_HOSTS = ["127.0.0.1", get_ip_address()]
 CSRF_TRUSTED_ORIGINS = [f"http://{get_ip_address()}"]
 
-sys.stdout.write(f"IP address: http://{get_ip_address()}\n") # get the ip address from the command line.
+# get the ip address from the command line.
+sys.stdout.write(f"IP address: http://{get_ip_address()}\n") 
 
 # ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['192.168.1.122'])
 
