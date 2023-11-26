@@ -125,7 +125,7 @@ celery -A config beat -l info
 ```sh
 CELERYD_NODES="w1"
 
-CELERY_BIN="/var/www/html/smartProject/venv/bin/celery"
+CELERY_BIN="/var/www/html/rpi-sensors/venv/bin/celery"
 
 CELERY_APP="smart"
 
@@ -166,7 +166,7 @@ Type=forking
 User=pi
 Group=celery
 EnvironmentFile=/etc/systemd/celery.conf
-WorkingDirectory=/var/www/html/rpi-sensor/
+WorkingDirectory=/var/www/html/rpi-sensors/
 ExecStart=/bin/sh -c '${CELERY_BIN} -A $CELERY_APP multi start $CELERYD_NODES \
     --pidfile=${CELERYD_PID_FILE} --logfile=${CELERYD_LOG_FILE} \
     --loglevel="${CELERYD_LOG_LEVEL}" $CELERYD_OPTS'
