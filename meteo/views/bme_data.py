@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import ListView
 
 from meteo.models import BmeData, DhtData
+from meteo.modules.sensor_data import bme_data_list
 
 
 class BmeDataView(ListView):
@@ -11,34 +12,7 @@ class BmeDataView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["data_list"] = [
-           { 
-                'box': [
-                    {
-                        'dataName': "Температура, &deg;C",
-                        'className': 'bx bxs-thermometer readings',
-                        'id': 'temperature',
-                    }, 
-                    {
-                        'dataName': "Влажность, %", 
-                        'className': 'bx bxs-droplet-half readings readings--two',
-                        'id': 'humidity',
-                    }, 
-                    {
-                        'dataName': "Давление, мм.рт.ст.", 
-                        'className': 'bx bxs-tachometer readings readings--three',
-                        'id': 'pressure',
-                    },
-                ]
-            },
-            {
-                'gauge': [
-                    'temperature',
-                    'humidity',
-                    'pressure',
-                ]
-            }
-        ]
+        context["data_list"] = bme_data_list
         return context
     
         
