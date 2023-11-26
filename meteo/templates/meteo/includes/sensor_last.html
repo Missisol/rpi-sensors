@@ -1,0 +1,41 @@
+<section class="section gauge">
+  {% if object_list %}
+    <div class="gauge__header">
+      <div class="gauge__title-wrapper">
+        <h2 class="title">
+          Данные на&nbsp;
+          <span id="local-date" class="title title--date"></span>
+        </h2>
+      </div>
+      <div id="icon-wrapper">
+        <i class="bx bx-grid-alt gauge__icon"></i>
+        <i class="bx bx-list-ul gauge__icon hidden"></i>
+      </div>
+    </div>
+    {% for item in data_list %}
+    <div class="wrapper gauge-wrapper hidden">
+      {% for el in item.gauge %}
+      <div class="gauge__box">
+        <div class="gauge__data" id="{{ el }}-gauge"></div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="wrapper box-wrapper visible">
+      {% for el in item.box %}
+        <div class="box">
+          <i class="{{ el.className }}"></i>
+          <div class="box__content">
+            {% autoescape off %}
+            <div class="box__title">{{ el.dataName }}</div>
+            {% endautoescape %}
+            <div class="box__data" id="{{ el.id }}"></div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endfor %}
+  {% else %}
+    <p>Нет данных</p>
+  {% endif %}
+</section>
