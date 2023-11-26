@@ -116,6 +116,8 @@ else:
 CELERY_BROKER_URL = "amqp://localhost"
 CELERY_BROKER_CONNECTION_RETRY = True
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+CELERY_ENABLE_UTC = False
+CELERY_TIMEZONE = 'Europe/Moscow'
 
 
 # Password validation

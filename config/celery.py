@@ -28,11 +28,13 @@ app.conf.beat_schedule = {
     'get_bme_history': { 
         'task': 'meteo.tasks.get_bme_history',
         # 'schedule': crontab(), 
-        'schedule': crontab(minute=0, hour='*/1'),
+        # 'schedule': crontab(minute=0, hour='*/1'),
+        'schedule': crontab(minute='*/15'), 
     },
     'get_dht_history': { 
         'task': 'meteo.tasks.get_dht_history',
         # 'schedule': crontab(), 
-        'schedule': crontab(minute=0, hour='*/1'),
+        # 'schedule': crontab(minute=0, hour='*/1'),
+        'schedule': crontab(minute='*/15'), 
     },
 }
