@@ -166,3 +166,4 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
 }
 
+DHT_URL = env('DHT_URL')
