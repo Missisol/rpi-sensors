@@ -4,6 +4,9 @@ import adafruit_dht
 from meteo.models import DhtData
 
 import random
+import requests
+
+from django.conf import settings
 
 
 class DHT22Module:
@@ -14,10 +17,15 @@ class DHT22Module:
         # Print the values to the serial port
         # tr = self.DHT22Sensor.temperature
         # hum = self.DHT22Sensor.humidity
-        tr = round(random.uniform(19.0, 23.9), 1)
-        hum = round(random.uniform(46.0, 49.9), 1)
+        url = settings.DHT_URL
+        data = requests.get(url).json()
+        # print(f'data: {data}')
+        # print(f'url {settings.DHT_URL}')
 
-        print('Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(tr, hum))
+        tr = data['temperature']
+        hum = data['humidity']
+
+        # print('Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(tr, hum))
 
         if hum is not None and tr is not None:
             dht22 = DhtData(temperature = round(tr, 1), humidity = round(hum, 1))

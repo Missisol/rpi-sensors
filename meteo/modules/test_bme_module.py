@@ -16,8 +16,7 @@ class BME280Module:
     ADDRESS = 0x76
 
     
-    def __init__(self):
-        print('yes')
+    # def __init__(self):
         # self.bus = smbus2.SMBus(BME280Module.PORT)
         # self.calibration_params = bme280.load_calibration_params(self.bus, BME280Module.ADDRESS)
         
@@ -38,9 +37,9 @@ class BME280Module:
         # timestamp_val = timestamp_raw_val.astimezone(moscowtz)
         fmt = '%d-%m-%Y %H:%M:%S'
         now = datetime.now()
-        print(f'now: {now}')
+        # print(f'now: {now}')
         dd = now.astimezone(moscowtz)
-        print(f'dd: {now.astimezone(moscowtz)}')
+        # print(f'dd: {now.astimezone(moscowtz)}')
 
         # current_date = dd.astimezone(moscowtz).strftime(fmt)
         # current_date = datetime.timestamp(now).astimezone(moscowtz).strftime(fmt)
@@ -51,7 +50,7 @@ class BME280Module:
 
         fm = '%Y-%m-%d'
         dt = dd.strftime(fm)
-        print(f'dt: {dt}')
+        # print(f'dt: {dt}')
 
         bme = BmeData(temperature = temperature_val, humidity = humidity_val, pressure = pressure_val, full_date = dd, date = dt)
         bme.save()
