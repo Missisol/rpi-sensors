@@ -102,12 +102,6 @@ else:
     }
 
 
-# Celery configuration
-CELERY_BROKER_URL = "amqp://localhost"
-CELERY_BROKER_CONNECTION_RETRY = True
-CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
-CELERY_ENABLE_UTC = False
-CELERY_TIMEZONE = 'Europe/Moscow'
 
 
 # Password validation
@@ -139,6 +133,13 @@ TIME_ZONE = 'Europe/Moscow'
 USE_I18N = True
 
 USE_TZ = True
+
+
+# Celery configuration
+CELERY_BROKER_URL = "amqp://localhost"
+CELERY_BROKER_CONNECTION_RETRY = True
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+# CELERY_TIMEZONE = TIME_ZONE
 
 
 # Static files (CSS, JavaScript, Images)
