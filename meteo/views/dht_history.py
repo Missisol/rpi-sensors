@@ -12,36 +12,32 @@ class DhtHistoryView(ListView):
 
 
 class DhtHistoryQuery():
-    yesterday =  date.today() - timedelta(days=1)
-    dht_yesterday_data = DhtData.objects.filter(date=yesterday)
-    history_yestarday_data = DhtHistory.objects.filter(date=yesterday)
-
-    def delete_yesterday_data(self):
-        DhtData.objects.filter(date=self.yesterday).delete()
-        print('Deleted DHT22 yesterday data')
-
-
     def get_minmax_dht_date(self):
+        yesterday =  date.today() - timedelta(days=1)
+        dht_yesterday_data = DhtData.objects.filter(date=yesterday)
+        history_yestarday_data = DhtHistory.objects.filter(date=yesterday)
+        
         try:
-            if self.dht_yesterday_data and not self.history_yestarday_data:
-                minmax = self.dht_yesterday_data.aggregate(
+            if dht_yesterday_data.exists() and not history_yestarday_data.exists():
+                minmax = dht_yesterday_data.aggregate(
                     Min('temperature'), 
                     Max('temperature'), 
                     Min('humidity'), 
                     Max('humidity'), 
                 )
                 history = DhtHistory(
-                    date = self.yesterday,
+                    date = yesterday,
                     min_temperature = minmax['temperature__min'], 
                     max_temperature = minmax['temperature__max'], 
                     min_humidity = minmax['humidity__min'], 
                     max_humidity = minmax['humidity__max'],  
                 )
                 history.save()
-                print('DHT22 history data saved')
-                self.delete_yesterday_data()
-            elif self.dht_yesterday_data and self.history_yestarday_data:
-                self.delete_yesterday_data()
+                DhtData.objects.filter(date=yesterday).delete()
+                print('DHT22 history data saved and DHT yesterday data deleted')
+            elif dht_yesterday_data.exists() and history_yestarday_data.exists():
+                DhtData.objects.filter(date=yesterday).delete()
+                print('DHT yesterday data deleted')
             else:
                 print('DHT22 data has already been deleted')
         except Exception as e:
