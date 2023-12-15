@@ -1,17 +1,17 @@
-import board
-import adafruit_dht
+from django.conf import settings
+import requests
 
 from meteo.models import DhtData
 
 
 class DHT22Module:
-  DHT22Sensor = adafruit_dht.DHT22(board.D18, use_pulseio=False)
 
   def get_dht_data(self):
     try:
-        # Print the values to the serial port
-        tr = self.DHT22Sensor.temperature
-        hum = self.DHT22Sensor.humidity
+        url = settings.DHT_URL
+        data = requests.get(url).json()
+        tr = data['temperature']
+        hum = data['humidity']
         print('Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(tr, hum))
 
         if hum is not None and tr is not None:
