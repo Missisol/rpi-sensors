@@ -19,7 +19,7 @@ def get_bme_data():
 
 @app.task
 def get_bme_history():
-    history.get_minmax_bme_date()
+    history.get_minmax_bme_data()
 
 
 @app.task
@@ -29,4 +29,4 @@ def get_dht_data():
 
 @app.task
 def get_dht_history():
-    dhtHistory.get_minmax_dht_date()
+    dhtHistory.get_minmax_dht_data()
