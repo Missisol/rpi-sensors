@@ -1,16 +1,16 @@
 from config.celery import app
 
 from meteo.modules import BME280Module, DHT22Module
-
 from meteo.views.bme_history import BmeHistoryQuery
-from meteo.views.dht_history import Dht1HistoryQuery, Dht2HistoryQuery
+from meteo.views.dht_history import DhtHistoryQuery
+from meteo.models import Dht1Data, Dht1History, Dht2Data, Dht2History
+
 
 
 bme280_module = BME280Module()
 dht22_module = DHT22Module()
 history = BmeHistoryQuery()
-dht1History = Dht1HistoryQuery()
-dht2History = Dht2HistoryQuery()
+dhtHistory = DhtHistoryQuery()
 
 
 @app.task
@@ -29,10 +29,6 @@ def get_dht_data():
 
 
 @app.task
-def get_dht1_history():
-    dht1History.get_minmax_dht_date()
-
-
-@app.task
-def get_dht2_history():
-    dht2History.get_minmax_dht_date()
+def get_dht_history():
+    dhtHistory.get_minmax_dht_date(Dht1Data, Dht1History, 1)
+    dhtHistory.get_minmax_dht_date(Dht2Data, Dht2History, 2)
