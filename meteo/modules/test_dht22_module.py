@@ -1,7 +1,7 @@
 import board
 import adafruit_dht
 
-from meteo.models import DhtData
+from meteo.models import Dht1Data, Dht2Data
 
 import random
 import requests
@@ -22,16 +22,24 @@ class DHT22Module:
         # print(f'data: {data}')
         # print(f'url {settings.DHT_URL}')
 
-        tr = data['temperature']
-        hum = data['humidity']
+        tr1 = data['dht1']['temperature']
+        hum1 = data['dht1']['humidity']
+        tr2 = data['dht2']['temperature']
+        hum2 = data['dht2']['humidity']
 
         # print('Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(tr, hum))
 
-        if hum is not None and tr is not None:
-            dht22 = DhtData(temperature = round(tr, 1), humidity = round(hum, 1))
-            dht22.save()
+        if hum1 is not None and tr1 is not None:
+            dht22_1 = Dht1Data(temperature = round(tr1, 1), humidity = round(hum1, 1))
+            dht22_1.save()
         else:
-            print('DHT22 error')
+            print('DHT22_1 error')
+
+        if hum2 is not None and tr2 is not None:
+            dht22_2 = Dht2Data(temperature = round(tr2, 1), humidity = round(hum2, 1))
+            dht22_2.save()
+        else:
+            print('DHT22_1 error')
 
     except RuntimeError as error:
         # Errors happen fairly often, DHT's are hard to read, just keep going

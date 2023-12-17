@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # from meteo import models
-from meteo.models import BmeData, BmeHistory, DhtData, DhtHistory
+from meteo.models import BmeData, BmeHistory, Dht1Data, Dht2Data, Dht1History, Dht2History
 
 
 @admin.register(BmeData)
@@ -57,9 +57,10 @@ class BmeHistoryAdmin(admin.ModelAdmin):
         'min_pressure', 
         'max_pressure',
     ]
+    
 
-@admin.register(DhtData)
-class DhtDataAdmin(admin.ModelAdmin):
+@admin.register(Dht1Data)
+class Dht1DataAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Дата', {'fields': ['date']}),
         ('Данные ВРЕ22', {
@@ -77,8 +78,52 @@ class DhtDataAdmin(admin.ModelAdmin):
         'full_date',
     ]
 
-@admin.register(DhtHistory)
-class DhtHistoryAdmin(admin.ModelAdmin):
+
+@admin.register(Dht1History)
+class Dht1HistoryAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None, {'fields': ['date']}),
+        ('История dht22', {
+        'fields': [
+            'min_temperature', 
+            'max_temperature', 
+            'min_humidity', 
+            'max_humidity', 
+            ]
+        })
+    ]
+    list_display = [
+        'id', 
+        'date', 
+        'min_temperature', 
+        'max_temperature', 
+        'min_humidity', 
+        'max_humidity', 
+    ]
+
+
+@admin.register(Dht2Data)
+class Dht2DataAdmin(admin.ModelAdmin):
+    fieldsets = [
+        ('Дата', {'fields': ['date']}),
+        ('Данные ВРЕ22', {
+        'fields': [
+            'temperature', 
+            'humidity', 
+            ]
+        })
+    ]
+    list_display = [
+        'id', 
+        'date', 
+        'temperature', 
+        'humidity', 
+        'full_date',
+    ]
+
+
+@admin.register(Dht2History)
+class Dht2HistoryAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['date']}),
         ('История dht22', {

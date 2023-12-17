@@ -15,15 +15,15 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     'get_bme_data': { 
         'task': 'meteo.tasks.get_bme_data',
-        'schedule': crontab(), 
+        # 'schedule': crontab(), 
         # 'schedule': crontab(minute='*/5'), 
-        # 'schedule': crontab(minute='*/15'), 
+        'schedule': crontab(minute='*/15'), 
     },
     'get_dht_data': { 
         'task': 'meteo.tasks.get_dht_data',
-        'schedule': crontab(), 
+        # 'schedule': crontab(), 
         # 'schedule': crontab(minute='*/5'), 
-        # 'schedule': crontab(minute='*/15'), 
+        'schedule': crontab(minute='*/15'), 
     },
     'get_bme_history': { 
         'task': 'meteo.tasks.get_bme_history',
@@ -31,8 +31,14 @@ app.conf.beat_schedule = {
         # 'schedule': crontab(minute=0, hour='*/1'),
         'schedule': crontab(minute='*/15'), 
     },
-    'get_dht_history': { 
-        'task': 'meteo.tasks.get_dht_history',
+    'get_dht1_history': { 
+        'task': 'meteo.tasks.get_dht1_history',
+        # 'schedule': crontab(), 
+        # 'schedule': crontab(minute=0, hour='*/1'),
+        'schedule': crontab(minute='*/15'), 
+    },
+    'get_dht2_history': { 
+        'task': 'meteo.tasks.get_dht2_history',
         # 'schedule': crontab(), 
         # 'schedule': crontab(minute=0, hour='*/1'),
         'schedule': crontab(minute='*/15'), 

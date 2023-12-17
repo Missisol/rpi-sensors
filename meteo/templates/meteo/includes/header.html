@@ -19,17 +19,31 @@
         {% endif %}
       </li>
       <li>
-        {% if request.path == '/dht/' %}
-          <a class="header__link header__link--active" href="{% url 'dht' %}">Данные DHT22</a>
+        {% if request.path == '/dht1/' %}
+          <a class="header__link header__link--active" href="{% url 'dht1' %}">Данные DHT22-1</a>
         {% else %}
-          <a class="header__link" href="{% url 'dht' %}">Данные DHT22</a>
+          <a class="header__link" href="{% url 'dht1' %}">Данные DHT22-1</a>
         {% endif %}
       </li>
       <li>
-        {% if request.path == '/dht-history/' %}
-          <a class="header__link header__link--active" href="{% url 'dht-history' %}">История DHT22</a>
+        {% if request.path == '/dht1-history/' %}
+          <a class="header__link header__link--active" href="{% url 'dht1-history' %}">История DHT22-1</a>
         {% else %}
-          <a class="header__link" href="{% url 'dht-history' %}">История DHT22</a>
+          <a class="header__link" href="{% url 'dht1-history' %}">История DHT22-1</a>
+        {% endif %}
+      </li>
+      <li>
+        {% if request.path == '/dht2/' %}
+          <a class="header__link header__link--active" href="{% url 'dht2' %}">Данные DHT22-2</a>
+        {% else %}
+          <a class="header__link" href="{% url 'dht2' %}">Данные DHT22-2</a>
+        {% endif %}
+      </li>
+      <li>
+        {% if request.path == '/dht2-history/' %}
+          <a class="header__link header__link--active" href="{% url 'dht2-history' %}">История DHT22-2</a>
+        {% else %}
+          <a class="header__link" href="{% url 'dht2-history' %}">История DHT22-2</a>
         {% endif %}
       </li>
     </ul>

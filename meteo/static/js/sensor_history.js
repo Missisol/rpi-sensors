@@ -1,11 +1,11 @@
 import { getProcessedFields, getDeltaPlotly } from './modules/plotlyHistory.js';
 import { timer, getDataForLineChart, getDivs } from './modules/commonData.js';
 
-const pathname = document.location.pathname.slice(1, 4);
+const pathname = document.location.pathname.replaceAll('/', '');
 const fields = getProcessedFields(pathname);
 
 function updateDelta() {
-  fetch(`/api/${pathname}-history/`)
+  fetch(`/api/${pathname}/`)
     .then((res) => res.json())
     .then((jsonRes) => {
       const res = jsonRes.results;
