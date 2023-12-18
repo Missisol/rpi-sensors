@@ -2,7 +2,7 @@ from django.urls import include, path
 from rest_framework.urlpatterns import format_suffix_patterns
 
 # from meteo.api import views
-from meteo.api.views import BmeViewSet, BmeLastViewSet, BmeHistoryViewSet, DhtViewSet, DhtLastViewSet, DhtHistoryViewSet
+from meteo.api.views import BmeViewSet, BmeLastViewSet, BmeHistoryViewSet, Dht1ViewSet, Dht1LastViewSet, Dht1HistoryViewSet, Dht2ViewSet, Dht2LastViewSet, Dht2HistoryViewSet
 
 
 bme_list =BmeViewSet.as_view({
@@ -22,20 +22,37 @@ bme_history_detail = BmeHistoryViewSet.as_view({
     'get': 'retrieve',
     'delete': 'destroy',
 })
-dht_list = DhtViewSet.as_view({
+dht1_list = Dht1ViewSet.as_view({
     'get': 'list',
 })
-dht_detail = DhtViewSet.as_view({
+dht1_detail = Dht1ViewSet.as_view({
     'get': 'retrieve',
     'delete': 'destroy',
 })
-dht_last_list =DhtLastViewSet.as_view({
+dht1_last_list =Dht1LastViewSet.as_view({
     'get': 'list',
 })
-dht_history_list = DhtHistoryViewSet.as_view({
+dht1_history_list = Dht1HistoryViewSet.as_view({
     'get': 'list',
 })
-dht_history_detail = DhtHistoryViewSet.as_view({
+dht1_history_detail = Dht1HistoryViewSet.as_view({
+    'get': 'retrieve',
+    'delete': 'destroy',
+})
+dht2_list = Dht2ViewSet.as_view({
+    'get': 'list',
+})
+dht2_detail = Dht2ViewSet.as_view({
+    'get': 'retrieve',
+    'delete': 'destroy',
+})
+dht2_last_list =Dht2LastViewSet.as_view({
+    'get': 'list',
+})
+dht2_history_list = Dht2HistoryViewSet.as_view({
+    'get': 'list',
+})
+dht2_history_detail = Dht2HistoryViewSet.as_view({
     'get': 'retrieve',
     'delete': 'destroy',
 })
@@ -49,9 +66,14 @@ urlpatterns = [
   path('bme-last/', bme_last_list, name='bme-last-list'),
   path('bme-history/', bme_history_list, name='bme-history-list'),
   path('bme-history/<int:pk>/', bme_history_detail, name='bme-history-detail'),
-  path('dht/', dht_list, name='dht-list'),
-  path('dht/<int:pk>/', dht_detail, name='dht-detail'),
-  path('dht-last/', dht_last_list, name='dht-last-list'),
-  path('dht-history/', dht_history_list, name='dht-history-list'),
-  path('dht-history/<int:pk>/', dht_history_detail, name='dht-history-detail'),
+  path('dht1/', dht1_list, name='dht1-list'),
+  path('dht1/<int:pk>/', dht1_detail, name='dht1-detail'),
+  path('dht1-last/', dht1_last_list, name='dht1-last-list'),
+  path('dht1-history/', dht1_history_list, name='dht1-history-list'),
+  path('dht1-history/<int:pk>/', dht1_history_detail, name='dht1-history-detail'),
+  path('dht2/', dht2_list, name='dht2-list'),
+  path('dht2/<int:pk>/', dht2_detail, name='dht2-detail'),
+  path('dht2-last/', dht2_last_list, name='dht2-last-list'),
+  path('dht2-history/', dht2_history_list, name='dht2-history-list'),
+  path('dht2-history/<int:pk>/', dht2_history_detail, name='dht2-history-detail'),
 ]

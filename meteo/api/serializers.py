@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from meteo.models import BmeData, BmeHistory, DhtData, DhtHistory
+from meteo.models import BmeData, BmeHistory, Dht1Data, Dht1History, Dht2Data, Dht2History
 
 
 class BmeSerializer(serializers.HyperlinkedModelSerializer):
@@ -15,15 +15,27 @@ class BmeHistorySerializer(serializers.HyperlinkedModelSerializer):
         fields = ['id', 'min_temperature', 'max_temperature', 'min_humidity', 'max_humidity', 'min_pressure', 'max_pressure', 'date']
 
 
-class DhtDataSerializer(serializers.HyperlinkedModelSerializer):
+class Dht1DataSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = DhtData
+        model = Dht1Data
         fields = ['id', 'temperature', 'humidity', 'full_date', 'date']
 
 
-class DhtHistorySerializer(serializers.HyperlinkedModelSerializer):
+class Dht1HistorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = DhtHistory
+        model = Dht1History
+        fields = ['id', 'min_temperature', 'max_temperature', 'min_humidity', 'max_humidity', 'date']
+
+
+class Dht2DataSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Dht2Data
+        fields = ['id', 'temperature', 'humidity', 'full_date', 'date']
+
+
+class Dht2HistorySerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Dht2History
         fields = ['id', 'min_temperature', 'max_temperature', 'min_humidity', 'max_humidity', 'date']
 
 

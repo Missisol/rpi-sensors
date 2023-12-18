@@ -87,6 +87,12 @@ celery -A config beat -l info
 ```
 
 ## Production
+### Обслуживание статических файлов на продакшн сервере 
+<https://docs.djangoproject.com/en/4.2/howto/static-files/#deployment>
+
+`
+python manage.py collectstatic
+`
 ### Настройка деплоя с wsgi_mod  
 <https://docs.djangoproject.com/en/4.2/howto/static-files/#deployment>  
 <https://docs.djangoproject.com/en/4.2/howto/deployment/wsgi/modwsgi/>
@@ -107,7 +113,7 @@ celery -A config beat -l info
             </Files>
       </Directory>
 
-      WSGIDaemonProcess django python-home=/var/www/html/rpi-sensors/venv python-path=/var/www/html/rpi-s>
+      WSGIDaemonProcess django python-home=/var/www/html/rpi-sensors/venv python-path=/var/www/html/rpi-sensors
       WSGIProcessGroup django
       WSGIScriptAlias / /var/www/html/rpi-sensors/config/wsgi.py 
   ```
@@ -127,9 +133,9 @@ celery -A config beat -l info
 ```sh
 CELERYD_NODES="w1"
 
-CELERY_BIN="/var/www/html/smartProject/venv/bin/celery"
+CELERY_BIN="/var/www/html/rpi-sensors/venv/bin/celery"
 
-CELERY_APP="smart"
+CELERY_APP="config"
 
 CELERYD_MULTI="multi"
 
@@ -168,7 +174,7 @@ Type=forking
 User=pi
 Group=celery
 EnvironmentFile=/etc/systemd/celery.conf
-WorkingDirectory=/var/www/html/rpi-sensor/
+WorkingDirectory=/var/www/html/rpi-sensors/
 ExecStart=/bin/sh -c '${CELERY_BIN} -A $CELERY_APP multi start $CELERYD_NODES \
     --pidfile=${CELERYD_PID_FILE} --logfile=${CELERYD_LOG_FILE} \
     --loglevel="${CELERYD_LOG_LEVEL}" $CELERYD_OPTS'
@@ -222,12 +228,3 @@ sudo systemctl enable celerybeat.service
 ```
 
 <https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units-ru>
-
-
-
-#### Обслуживание статических файлов на продакшн сервере 
-<https://docs.djangoproject.com/en/4.2/howto/static-files/#deployment>
-
-`
-python manage.py collectstatic
-`

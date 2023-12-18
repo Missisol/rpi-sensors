@@ -71,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'meteo.utils.context_processors.get_menu',
             ],
         },
     },
@@ -102,10 +103,6 @@ else:
     }
 
 
-# Celery configuration
-CELERY_BROKER_URL = "amqp://localhost"
-CELERY_BROKER_CONNECTION_RETRY = True
-CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 
 
 # Password validation
@@ -139,6 +136,13 @@ USE_I18N = True
 USE_TZ = True
 
 
+# Celery configuration
+CELERY_BROKER_URL = "amqp://localhost"
+CELERY_BROKER_CONNECTION_RETRY = True
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+# CELERY_TIMEZONE = TIME_ZONE
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
@@ -155,9 +159,12 @@ CORS_ORIGIN_ALLOW_ALL = True
 SECURE_CROSS_ORIGIN_OPENER_POLICY = 'unsafe-none'
 SECURE_REFERRER_POLICY = 'no-referrer'
 
+CSRF_TRUSTED_ORIGINS = ['http://192.168.1.122']
+
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
 }
 
+DHT_URL = env('DHT_URL')

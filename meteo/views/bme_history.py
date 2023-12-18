@@ -12,19 +12,14 @@ class BmeHistoryView(ListView):
 
 
 class BmeHistoryQuery():
-    yesterday =  date.today() - timedelta(days=1)
-    bme_yesterday_data = BmeData.objects.filter(date=yesterday)
-    history_yestarday_data = BmeHistory.objects.filter(date=yesterday)
+    def get_minmax_bme_data(self):
+        yesterday =  date.today() - timedelta(days=1)
+        bme_yesterday_data = BmeData.objects.filter(date=yesterday)
+        history_yestarday_data = BmeHistory.objects.filter(date=yesterday)
 
-    def delete_yesterday_data(self):
-        BmeData.objects.filter(date=self.yesterday).delete()
-        print('Deleted BME yesterday data')
-
-
-    def get_minmax_bme_date(self):
         try:
-            if self.bme_yesterday_data and not self.history_yestarday_data:
-                minmax = self.bme_yesterday_data.aggregate(
+            if bme_yesterday_data.exists() and not history_yestarday_data.exists():
+                minmax = bme_yesterday_data.aggregate(
                     Min('temperature'), 
                     Max('temperature'), 
                     Min('humidity'), 
@@ -33,7 +28,7 @@ class BmeHistoryQuery():
                     Max('pressure')
                 )
                 history = BmeHistory(
-                    date = self.yesterday,
+                    date = yesterday,
                     min_temperature = minmax['temperature__min'], 
                     max_temperature = minmax['temperature__max'], 
                     min_humidity = minmax['humidity__min'], 
@@ -42,11 +37,11 @@ class BmeHistoryQuery():
                     max_pressure = minmax['pressure__max'], 
                 )
                 history.save()
-                print('BME History data saved')
-                self.delete_yesterday_data()
-            elif self.bme_yesterday_data and self.history_yestarday_data:
-                # print('Deleted BME yesterday data')
-                self.delete_yesterday_data()
+                BmeData.objects.filter(date=yesterday).delete()
+                print('BME History data saved and BME yesterday data deleted')
+            elif bme_yesterday_data.exists() and history_yestarday_data.exists():
+                BmeData.objects.filter(date=yesterday).delete()
+                print('BME yesterday data deleted')
             else:
                 print('BME data has already been deleted')
         except Exception as e:

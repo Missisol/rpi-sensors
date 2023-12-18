@@ -6,17 +6,10 @@
 {% endblock %}
 
 {% block content %}
-
-{% include 'meteo/includes/page_title.html' with title="История DHT22" %}
-<section class="section charts">
-    <div class="charts__wrapper">
-      <div id="temperature-delta" class="charts__chart"></div>
-      <div id="humidity-delta" class="charts__chart"></div>
-      <div id="pressure-delta" class="charts__chart"></div>
-    </div>
-  </section>
+  {% include 'meteo/includes/page_title.html' with title="История DHT22" %}
+  {% include 'meteo/includes/sensor_dynamic.html' %}
 {% endblock %}
 
 {% block script %}
-<script src="{% static 'js/dht_history.js' %}" charset="utf-8"></script>
+<script type="module" src="{% static 'js/sensor_history.js' %}" charset="utf-8"></script>
 {% endblock %}
