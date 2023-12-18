@@ -1,13 +1,24 @@
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView
 
-from meteo.models import DhtData
+from meteo.models import Dht1Data, Dht2Data
 from meteo.utils.sensor_data import data_list
 
-class DhtDataView(ListView):
+class Dht1DataView(ListView):
     template_name = "meteo/dht_data.html"
-    queryset = DhtData.objects.order_by("-id")[:10]
-    context_object_name = "dht_data"
+    queryset = Dht1Data.objects.order_by("-id")[:10]
+    context_object_name = "dht1_data"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["data_list"] = data_list
+        return context
+
+        
+class Dht2DataView(ListView):
+    template_name = "meteo/dht_data.html"
+    queryset = Dht2Data.objects.order_by("-id")[:10]
+    context_object_name = "dht2_data"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -1,7 +1,7 @@
 import { getGaugePlotly, getHystoryPlotly } from './modules/plotlyData.js'
 import { timer, getDataForLineChart, getDivs, getFields } from './modules/commonData.js'
 
-const pathname = document.location.pathname.slice(1, -1);
+const pathname = document.location.pathname.replaceAll('/', '');
 const fields = getFields(pathname);
 
 /* Box block & gauge block */
