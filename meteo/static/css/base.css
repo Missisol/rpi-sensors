@@ -12,7 +12,10 @@
     height: 100%;
   }
 
-  body {
+  :root {
+    /* Для сответствия цвета контролов цветовой схеме браузера или системы*/
+    color-scheme: light dark; 
+
     --base-color: #fff;
     --base-grey-color: #595959;
     --medium-grey-color: #808080;
@@ -26,8 +29,25 @@
     --light-red-color: #ef7985;
 
     --gap: 1rem;
-  
+    }
 
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --base-color: #191919;
+      --base-grey-color: #b2b0b0;
+      --medium-grey-color: #808080;
+      --light-grey-color: #cecece;
+      --base-blue-color: #3392f1;
+      --medium-blue-color: #70b0ef;
+      --light-blue-color: #a6cdf3;
+      --base-green-color: #3ba639;
+      --light-green-color: #aaffa9;
+      --base-red-color: #ff0000;
+      --light-red-color: #ef7985;
+    }
+  }
+
+  body {
     line-height: 1.5;
     font-family: 'Roboto', sans-serif;
     background: var(--base-color);

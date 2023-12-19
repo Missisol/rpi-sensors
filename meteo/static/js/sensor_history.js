@@ -3,6 +3,7 @@ import { timer, getDataForLineChart, getDivs } from './modules/commonData.js';
 
 const pathname = document.location.pathname.replaceAll('/', '');
 const fields = getProcessedFields(pathname);
+let bgcolor;
 
 function updateDelta() {
   fetch(`/api/${pathname}/`)
@@ -25,7 +26,23 @@ function updateDelta() {
         )
       };
   })
-};
+}
+
+function changeBgcolor() {
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+    bgcolor = event.matches ? '#191919' : '#fff';
+
+    const layout_update = {
+      paper_bgcolor: bgcolor,
+      plot_bgcolor: bgcolor,
+    }
+    
+    for (const [key, value] of  Object.entries(fields)) {
+      Plotly.update(document.querySelector(`#${key}-chart`), {}, layout_update);
+    }
+  })
+}
+
 
 function loop() {
   setTimeout(() => {
@@ -38,8 +55,9 @@ function init() {
   getDeltaPlotly(Object.keys(fields), getDivs('.charts__chart'));
   updateDelta();
   loop();
-};
+  changeBgcolor();
+}
 
 window.onload = (e) => {
   init();
-};
+}

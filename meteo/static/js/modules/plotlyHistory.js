@@ -11,7 +11,8 @@ function getProcessedFields(str) {
 };
 
 function getDeltaPlotly(fields, divs) {
-  const dataArr = getFilteredDataArr(fields, lineChartDataArr)
+ let bgcolor = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? '#191919' : '#fff';
+  const dataArr = getFilteredDataArr(fields, lineChartDataArr);
   dataArr.forEach((data, idx) => {
     const trace1 = {
       x: [],
@@ -44,6 +45,8 @@ function getDeltaPlotly(fields, divs) {
         y: -1,
       },
       colorway: [data.color],
+      paper_bgcolor: bgcolor,
+      plot_bgcolor: bgcolor,
     };
   
     Plotly.newPlot(divs[idx], traces, layout, config);
