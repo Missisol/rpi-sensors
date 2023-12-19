@@ -3,6 +3,7 @@ import { timer, getDataForLineChart, getDivs, getFields } from './modules/common
 
 const pathname = document.location.pathname.replaceAll('/', '');
 const fields = getFields(pathname);
+let bgcolor, titlecolor;
 
 /* Box block & gauge block */
 function updateSensorReadings() {
@@ -21,19 +22,19 @@ function updateSensorReadings() {
         updateBoxes(field, fieldData)
       })
     });
-};
+}
 
 function updateGauge(field, fieldData) {
   const data_update = {
     value: fieldData,
   };
   Plotly.update(document.querySelector(`#${field}-gauge`), data_update);
-};
+}
 
 function updateBoxes(field, fieldData) {
   const div = document.querySelector(`#${field}`);
   div.innerHTML = fieldData;
-};
+}
 
 /* Line chart block */
 function updateLastData() {
@@ -53,7 +54,7 @@ function updateLastData() {
         )
       })
   })
-};
+}
 
 function updateCharts(xArray, yArray, historyDiv) {
   const data_update = {
@@ -61,6 +62,27 @@ function updateCharts(xArray, yArray, historyDiv) {
     y: [yArray],
   };
     Plotly.update(historyDiv, data_update);
+}
+
+function changeBgcolor() {
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+    bgcolor = event.matches ? '#191919' : '#fff';
+    titlecolor = event.matches ? '#cecece' : '#595959';
+
+
+    const layout_update = {
+      paper_bgcolor: bgcolor,
+      plot_bgcolor: bgcolor,
+      font: {
+        color: titlecolor,
+      },
+    }
+
+    fields.map((field) => {
+      Plotly.update(document.querySelector(`#${field}-chart`), {}, layout_update);
+      Plotly.update(document.querySelector(`#${field}-gauge`), {}, layout_update);
+    })
+  })
 }
 
 function loop() {
@@ -77,8 +99,9 @@ function init() {
   updateSensorReadings();
   updateLastData();
   loop();
-};
+  changeBgcolor();
+}
 
 window.onload = (e) => {
   init();
-};
+}

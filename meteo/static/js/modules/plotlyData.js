@@ -1,10 +1,24 @@
 import { config, lineChartDataArr, getFilteredDataArr } from './commonData.js';
 
+let bgcolor, titlecolor;
+if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  bgcolor = '#191919';
+  titlecolor = '#cecece';
+} else {
+  bgcolor = '#fff';
+  titlecolor = '#595959';
+}
+
 /* Gauge layout */
 const layout = { 
   width: 300,
   height: 250, 
   margin: { t: 30, b: 30, l: 30, r: 30 },
+  paper_bgcolor: bgcolor,
+  plot_bgcolor: bgcolor,
+  font: {
+    color: titlecolor,
+  },
 };
 
 const gaugeDataArr = [
@@ -102,6 +116,8 @@ function getHystoryPlotly(fields, divs) {
         color: "#808080",
       },
       colorway: [data.color],
+      paper_bgcolor: bgcolor,
+      plot_bgcolor: bgcolor,
     };
     Plotly.newPlot(divs[idx], [trace], layout, config);
   })
