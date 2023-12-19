@@ -16,7 +16,7 @@ const lineChartDataArr = [
 ];
 
 function getFields(str) {
-  return str === 'bme' ? dataFields : dataFields.slice(0, -1);
+  return str.includes('bme') ? dataFields : dataFields.slice(0, -1);
 };
 
 function getDataForLineChart(dataArr, field) {
