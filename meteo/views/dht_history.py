@@ -17,7 +17,7 @@ class Dht2HistoryView(ListView):
 
 
 class DhtHistoryQuery():
-    def get_minmax_dht_date(self, queryObj, queryHistoryObj, n):
+    def get_minmax_dht_data(self, queryObj, queryHistoryObj, n):
         yesterday =  date.today() - timedelta(days=1)
         dht_yesterday_data = queryObj.objects.filter(date=yesterday)
         history_yestarday_data = queryHistoryObj.objects.filter(date=yesterday)
