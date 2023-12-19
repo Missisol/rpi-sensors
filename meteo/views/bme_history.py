@@ -12,7 +12,7 @@ class BmeHistoryView(ListView):
 
 
 class BmeHistoryQuery():
-    def get_minmax_bme_date(self):
+    def get_minmax_bme_data(self):
         yesterday =  date.today() - timedelta(days=1)
         bme_yesterday_data = BmeData.objects.filter(date=yesterday)
         history_yestarday_data = BmeHistory.objects.filter(date=yesterday)
