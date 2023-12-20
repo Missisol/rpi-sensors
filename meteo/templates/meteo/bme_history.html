@@ -1,25 +1,15 @@
 {% extends 'meteo/base.html' %}
 {% load static %}
 
-{% block title %}
-  <title>
-    {% if debug %}
-      BME history test
-    {% else %}
-      BME history
-    {% endif %}
-  </title>
-{% endblock %} 
-
 {% block styles %}
-<link rel="stylesheet" href="{% static 'css/history.css' %}">
+  <link rel="stylesheet" href="{% static 'css/history.css' %}">
 {% endblock %}
 
 {% block content %}
-  {% include 'meteo/includes/page_title.html' with title="История BME280" %}
+  {% include 'meteo/includes/page_title.html' %}
   {% include 'meteo/includes/sensor_dynamic.html' %}
 {% endblock %}
 
 {% block script %}
-<script type="module" src="{% static 'js/sensor_history.js' %}" charset="utf-8"></script>
+  <script type="module" src="{% static 'js/sensor_history.js' %}" charset="utf-8"></script>
 {% endblock %}

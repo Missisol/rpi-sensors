@@ -10,6 +10,11 @@ class BmeHistoryView(ListView):
     queryset = BmeHistory.objects.order_by("-id")[:10]
     context_object_name = "bme_history"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = "История BME280"
+        return context
+
 
 class BmeHistoryQuery():
     def get_minmax_bme_data(self):
