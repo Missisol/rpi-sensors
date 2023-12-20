@@ -1,6 +1,7 @@
 import { config, lineChartDataArr, getFilteredDataArr } from './commonData.js';
 
 let bgcolor, titlecolor;
+
 if(window.matchMedia('(prefers-color-scheme)').media !== 'not all' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
   bgcolor = '#191919';
   titlecolor = '#cecece';
@@ -68,7 +69,7 @@ function getDataArr(fields, plotArrName) {
     :  lineChartDataArr
 
   return getFilteredDataArr(fields, dataArr)
-};
+}
 
 function getGaugePlotly(fields, divs) {
   const dataArr = getDataArr(fields, 'gaugeDataArr')
@@ -93,7 +94,7 @@ function getGaugePlotly(fields, divs) {
     ];
     Plotly.newPlot(divs[idx], trace, layout, config);
   })
-};
+}
 
 function getHystoryPlotly(fields, divs) {
   const dataArr = getDataArr(fields, 'historyDataArr')
@@ -121,6 +122,6 @@ function getHystoryPlotly(fields, divs) {
     };
     Plotly.newPlot(divs[idx], [trace], layout, config);
   })
-};
+}
 
-export { getGaugePlotly, getHystoryPlotly }
+export { getGaugePlotly, getHystoryPlotly };
