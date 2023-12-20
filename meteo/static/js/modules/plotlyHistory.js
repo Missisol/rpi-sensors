@@ -11,7 +11,8 @@ function getProcessedFields(str) {
 };
 
 function getDeltaPlotly(fields, divs) {
- let bgcolor = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? '#191919' : '#fff';
+ let bgcolor = window.matchMedia('(prefers-color-scheme)').media !== 'not all' && window.matchMedia('(prefers-color-scheme: dark)').matches ? '#191919' : '#fff';
+ 
   const dataArr = getFilteredDataArr(fields, lineChartDataArr);
   dataArr.forEach((data, idx) => {
     const trace1 = {

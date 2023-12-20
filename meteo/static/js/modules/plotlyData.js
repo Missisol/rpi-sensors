@@ -1,7 +1,7 @@
 import { config, lineChartDataArr, getFilteredDataArr } from './commonData.js';
 
 let bgcolor, titlecolor;
-if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+if(window.matchMedia('(prefers-color-scheme)').media !== 'not all' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
   bgcolor = '#191919';
   titlecolor = '#cecece';
 } else {
