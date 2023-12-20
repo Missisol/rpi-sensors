@@ -2,11 +2,11 @@
 {% load static %}
 
 {% block styles %}
-<link rel="stylesheet" href="{% static 'css/data.css' %}">
+  <link rel="stylesheet" href="{% static 'css/data.css' %}">
 {% endblock %}
 
 {% block content %}
-    {% include 'meteo/includes/page_title.html' with title="DHT22" %}
+    {% include 'meteo/includes/page_title.html' %}
     {% include 'meteo/includes/sensor_last.html' %}
     <div class="delimiter"></div>
     {% include 'meteo/includes/sensor_dynamic.html' %}
