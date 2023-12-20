@@ -8,10 +8,10 @@ function getProcessedFields(str) {
   })
 
   return obj;
-};
+}
 
 function getDeltaPlotly(fields, divs) {
- let bgcolor = window.matchMedia('(prefers-color-scheme)').media !== 'not all' && window.matchMedia('(prefers-color-scheme: dark)').matches ? '#191919' : '#fff';
+  let bgcolor = window.matchMedia('(prefers-color-scheme)').media !== 'not all' && window.matchMedia('(prefers-color-scheme: dark)').matches ? '#191919' : '#fff';
  
   const dataArr = getFilteredDataArr(fields, lineChartDataArr);
   dataArr.forEach((data, idx) => {
@@ -52,6 +52,6 @@ function getDeltaPlotly(fields, divs) {
   
     Plotly.newPlot(divs[idx], traces, layout, config);
   });
-};
+}
 
-export { getProcessedFields, getDeltaPlotly }
+export { getProcessedFields, getDeltaPlotly };
