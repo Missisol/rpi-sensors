@@ -12,7 +12,8 @@
     height: 100%;
   }
 
-  :root {
+  :root,
+  :root[data-force-color-mode='light'] {
     /* Для сответствия цвета контролов цветовой схеме браузера или системы*/
     color-scheme: light dark; 
 
@@ -47,6 +48,21 @@
       --light-red-color: #ef7985;
     }
   }
+
+  :root[data-force-color-mode='dark'] {
+    --base-color: #191919;
+    --base-grey-color: #b2b0b0;
+    --medium-grey-color: #808080;
+    --light-grey-color: #cecece;
+    --base-blue-color: #3392f1;
+    --medium-blue-color: #70b0ef;
+    --light-blue-color: #a6cdf3;
+    --base-green-color: #3ba639;
+    --light-green-color: #aaffa9;
+    --base-red-color: #ff0000;
+    --light-red-color: #ef7985;
+  }
+
 
   body {
     line-height: 1.5;
@@ -120,4 +136,44 @@
 .delimiter {
   height: 1px;
   background: var(--light-grey-color);
+}
+
+
+
+
+a {
+	color: var(--link-color);
+}
+
+/* Only show reset button if override is set */
+#reset-darkmode {
+	display: none;
+	text-decoration: none;
+	font-style: italic;
+}
+[data-force-color-mode] #reset-darkmode {
+	display: initial;
+}
+
+/* Visually hide the label text and Inject Light/Dark Mode Icon (based on checkbox value) */
+#toggle-darkmode {
+	display: none;
+}
+#toggle-darkmode + label > span {
+	position: absolute;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	width: 1px;
+	margin: -1px;
+	padding: 0;
+	border: 0;
+}
+#toggle-darkmode + label:after {
+	font-size: 4em;
+	content: "🔆";
+	cursor: pointer;
+}
+#toggle-darkmode:checked + label:after {
+	content: "🌙";
 }

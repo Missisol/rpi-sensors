@@ -1,26 +1,30 @@
 import { config, lineChartDataArr, getFilteredDataArr } from './commonData.js';
 
+const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 let bgcolor, titlecolor;
 
-if(window.matchMedia('(prefers-color-scheme)').media !== 'not all' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-  bgcolor = '#191919';
-  titlecolor = '#cecece';
-} else {
-  bgcolor = '#fff';
-  titlecolor = '#595959';
+const getColors = () => {
+  const modeOverride = localStorage.getItem('color-mode')
+  if (modeOverride) {
+    bgcolor = modeOverride === 'dark' ? '#191919' : '#fff';
+    titlecolor = modeOverride === 'dark' ? '#cecece' : '#595959';
+  } else {
+    bgcolor = mediaQuery.matches ? '#191919' : '#fff';
+    titlecolor = mediaQuery.matches ? '#cecece' : '#595959';
+  }
 }
 
 /* Gauge layout */
-const layout = { 
-  width: 300,
-  height: 250, 
-  margin: { t: 30, b: 30, l: 30, r: 30 },
-  paper_bgcolor: bgcolor,
-  plot_bgcolor: bgcolor,
-  font: {
-    color: titlecolor,
-  },
-};
+// const layout = { 
+//   width: 300,
+//   height: 250, 
+//   margin: { t: 30, b: 30, l: 30, r: 30 },
+//   paper_bgcolor: bgcolor,
+//   plot_bgcolor: bgcolor,
+//   font: {
+//     color: titlecolor,
+//   },
+// };
 
 const gaugeDataArr = [
   { 
@@ -72,6 +76,8 @@ function getDataArr(fields, plotArrName) {
 }
 
 function getGaugePlotly(fields, divs) {
+  getColors();
+
   const dataArr = getDataArr(fields, 'gaugeDataArr')
 
   dataArr.forEach((data, idx) => {
@@ -92,6 +98,17 @@ function getGaugePlotly(fields, divs) {
         },
       },
     ];
+    const layout = { 
+      width: 300,
+      height: 250, 
+      margin: { t: 30, b: 30, l: 30, r: 30 },
+      paper_bgcolor: bgcolor,
+      plot_bgcolor: bgcolor,
+      font: {
+        color: titlecolor,
+      },
+    };
+    
     Plotly.newPlot(divs[idx], trace, layout, config);
   })
 }
@@ -114,7 +131,7 @@ function getHystoryPlotly(fields, divs) {
       },
       font: {
         size: 14,
-        color: "#808080",
+        color: titlecolor,
       },
       colorway: [data.color],
       paper_bgcolor: bgcolor,

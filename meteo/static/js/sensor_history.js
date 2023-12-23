@@ -3,7 +3,9 @@ import { timer, getDataForLineChart, getDivs } from './modules/commonData.js';
 
 const pathname = document.location.pathname.replaceAll('/', '');
 const fields = getProcessedFields(pathname);
-let bgcolor;
+const themeSwitchers = document.querySelectorAll('.theme-switch');
+const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+let bgcolor, titlecolor;
 
 function updateDelta() {
   fetch(`/api/${pathname}/`)
@@ -28,21 +30,44 @@ function updateDelta() {
   })
 }
 
-function changeBgcolor() {
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-    bgcolor = event.matches ? '#191919' : '#fff';
+mediaQuery.addEventListener('change', () => {
+  const modeOverride = localStorage.getItem('color-mode')
+  if (modeOverride) {
+    bgcolor = modeOverride === 'dark' ? '#191919' : '#fff';
+    titlecolor = modeOverride === 'dark' ? '#cecece' : '#595959';
+  } else {
+    bgcolor = mediaQuery.matches ? '#191919' : '#fff';
+    titlecolor = mediaQuery.matches ? '#cecece' : '#595959';
+  }
+  changeBgcolor();
+});
 
-    const layout_update = {
-      paper_bgcolor: bgcolor,
-      plot_bgcolor: bgcolor,
+[...themeSwitchers].forEach((radio) => {
+  radio.addEventListener('change', (event) => {
+    if (event?.target?.value !== 'auto') {
+      bgcolor = event.target.value === 'dark' ? '#191919' : '#fff';
+      titlecolor = event.target.value === 'dark' ? '#cecece' : '#595959';
+    } else {
+      bgcolor = mediaQuery.matches ? '#191919' : '#fff';
+      titlecolor = mediaQuery.matches ? '#cecece' : '#595959';
     }
-    
-    for (const [key, value] of  Object.entries(fields)) {
-      Plotly.update(document.querySelector(`#${key}-chart`), {}, layout_update);
-    }
+    changeBgcolor();
   })
-}
+});
 
+function changeBgcolor() {
+  const layout_update = {
+    paper_bgcolor: bgcolor,
+    plot_bgcolor: bgcolor,
+    font: {
+      color: titlecolor,
+    },
+  }
+  
+  for (const [key, value] of Object.entries(fields)) {
+    Plotly.update(document.querySelector(`#${key}-chart`), {}, layout_update);
+  }
+}
 
 function loop() {
   setTimeout(() => {
@@ -55,9 +80,8 @@ function init() {
   getDeltaPlotly(Object.keys(fields), getDivs('.charts__chart'));
   updateDelta();
   loop();
-  changeBgcolor();
 }
 
-window.onload = (e) => {
+window.addEventListener('load', () => {
   init();
-}
+})

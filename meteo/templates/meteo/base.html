@@ -13,7 +13,8 @@
         {% endif %}
       </title>
     {% endblock %} 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    {% load static %}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link
@@ -21,9 +22,17 @@
     rel="stylesheet"
     >
 
-    {% load static %}
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <script src="{% static 'js/plotly-2.25.2.min.js' %}" charset="utf-8"></script>
+    <script>
+      // Check if there's any override. If so, let the markup know by setting an attribute on the <html> element
+      const colorModeOverride = window.localStorage.getItem('color-mode');
+      const hasColorModeOverride = typeof colorModeOverride === 'string';
+      if (hasColorModeOverride) {
+          document.documentElement.setAttribute('data-force-color-mode', colorModeOverride);
+      }
+    </script>    
+    <script src="{% static 'js/theme-switch.js' %}"></script>
 
     {% block styles %}{% endblock %}
 </head>

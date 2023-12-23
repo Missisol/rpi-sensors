@@ -1,5 +1,8 @@
 import { config, lineChartDataArr, getFields, getFilteredDataArr} from './commonData.js';
 
+const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+let bgcolor, titlecolor;
+
 function getProcessedFields(str) {
   let obj = {};
   const arr = getFields(str);
@@ -11,8 +14,15 @@ function getProcessedFields(str) {
 }
 
 function getDeltaPlotly(fields, divs) {
-  let bgcolor = window.matchMedia('(prefers-color-scheme)').media !== 'not all' && window.matchMedia('(prefers-color-scheme: dark)').matches ? '#191919' : '#fff';
- 
+  const modeOverride = localStorage.getItem('color-mode')
+  if (modeOverride) {
+    bgcolor = modeOverride === 'dark' ? '#191919' : '#fff';
+    titlecolor = modeOverride === 'dark' ? '#cecece' : '#595959';
+  } else {
+    bgcolor = mediaQuery.matches ? '#191919' : '#fff';
+    titlecolor = mediaQuery.matches ? '#cecece' : '#595959';
+  }
+
   const dataArr = getFilteredDataArr(fields, lineChartDataArr);
   dataArr.forEach((data, idx) => {
     const trace1 = {
@@ -39,7 +49,7 @@ function getDeltaPlotly(fields, divs) {
       },
       font: {
         size: 14,
-        color: "#808080",
+        color: titlecolor,
       },
       legend: {
         x: 0,
