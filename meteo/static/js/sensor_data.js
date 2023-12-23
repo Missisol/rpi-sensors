@@ -1,11 +1,14 @@
 import { getGaugePlotly, getHystoryPlotly } from './modules/plotlyData.js'
-import { timer, getDataForLineChart, getDivs, getFields } from './modules/commonData.js'
+import { 
+  timer, 
+  getDataForLineChart, 
+  getDivs, 
+  getFields, 
+  setListeners, 
+} from './modules/commonData.js'
 
 const pathname = document.location.pathname.replaceAll('/', '');
 const fields = getFields(pathname);
-const themeSwitchers = document.querySelectorAll('.theme-switch');
-const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-let bgcolor, titlecolor;
 
 /* Box block & gauge block */
 function updateSensorReadings() {
@@ -66,33 +69,7 @@ function updateCharts(xArray, yArray, historyDiv) {
   Plotly.update(historyDiv, data_update);
 }
 
-mediaQuery.addEventListener('change', () => {
-  const modeOverride = localStorage.getItem('color-mode')
-  if (modeOverride) {
-    bgcolor = modeOverride === 'dark' ? '#191919' : '#fff';
-    titlecolor = modeOverride === 'dark' ? '#cecece' : '#595959';
-  } else {
-    bgcolor = mediaQuery.matches ? '#191919' : '#fff';
-    titlecolor = mediaQuery.matches ? '#cecece' : '#595959';
-  }
-  changeBgcolor();
-});
-
-[...themeSwitchers].forEach((radio) => {
-  radio.addEventListener('change', (event) => {
-    if (event?.target?.value !== 'auto') {
-      bgcolor = event.target.value === 'dark' ? '#191919' : '#fff';
-      titlecolor = event.target.value === 'dark' ? '#cecece' : '#595959';
-    } else {
-      bgcolor = mediaQuery.matches ? '#191919' : '#fff';
-      titlecolor = mediaQuery.matches ? '#cecece' : '#595959';
-    }
-    changeBgcolor();
-  })
-});
-
-
-function changeBgcolor() {
+function changeBgcolor(bgcolor, titlecolor) {
   const layout_update = {
     paper_bgcolor: bgcolor,
     plot_bgcolor: bgcolor,
@@ -116,6 +93,7 @@ function loop() {
 }
 
 function init() {
+  setListeners(changeBgcolor);
   getGaugePlotly(fields, getDivs('.gauge__data'));
   getHystoryPlotly(fields, getDivs('.charts__chart'));
   updateSensorReadings();
@@ -123,7 +101,4 @@ function init() {
   loop();
 }
 
-
-window.addEventListener('load', () => {
-  init();
-})
+init();

@@ -1,30 +1,9 @@
-import { config, lineChartDataArr, getFilteredDataArr } from './commonData.js';
-
-const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-let bgcolor, titlecolor;
-
-const getColors = () => {
-  const modeOverride = localStorage.getItem('color-mode')
-  if (modeOverride) {
-    bgcolor = modeOverride === 'dark' ? '#191919' : '#fff';
-    titlecolor = modeOverride === 'dark' ? '#cecece' : '#595959';
-  } else {
-    bgcolor = mediaQuery.matches ? '#191919' : '#fff';
-    titlecolor = mediaQuery.matches ? '#cecece' : '#595959';
-  }
-}
-
-/* Gauge layout */
-// const layout = { 
-//   width: 300,
-//   height: 250, 
-//   margin: { t: 30, b: 30, l: 30, r: 30 },
-//   paper_bgcolor: bgcolor,
-//   plot_bgcolor: bgcolor,
-//   font: {
-//     color: titlecolor,
-//   },
-// };
+import { 
+  config, 
+  lineChartDataArr, 
+  getFilteredDataArr, 
+  getColors, 
+} from './commonData.js';
 
 const gaugeDataArr = [
   { 
@@ -76,8 +55,8 @@ function getDataArr(fields, plotArrName) {
 }
 
 function getGaugePlotly(fields, divs) {
-  getColors();
-
+  const modeOverride = localStorage.getItem('color-mode')
+  const { bgcolor, titlecolor } = getColors(modeOverride, modeOverride);
   const dataArr = getDataArr(fields, 'gaugeDataArr')
 
   dataArr.forEach((data, idx) => {
@@ -114,6 +93,8 @@ function getGaugePlotly(fields, divs) {
 }
 
 function getHystoryPlotly(fields, divs) {
+  const modeOverride = localStorage.getItem('color-mode')
+  const { bgcolor, titlecolor } = getColors(modeOverride, modeOverride);
   const dataArr = getDataArr(fields, 'historyDataArr')
 
   dataArr.forEach((data, idx) => {
