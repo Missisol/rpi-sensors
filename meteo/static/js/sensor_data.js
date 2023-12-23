@@ -3,6 +3,8 @@ import { timer, getDataForLineChart, getDivs, getFields } from './modules/common
 
 const pathname = document.location.pathname.replaceAll('/', '');
 const fields = getFields(pathname);
+const themeSwitchers = document.querySelectorAll('.theme-switch');
+const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 let bgcolor, titlecolor;
 
 /* Box block & gauge block */
@@ -61,27 +63,47 @@ function updateCharts(xArray, yArray, historyDiv) {
     x: [xArray],
     y: [yArray],
   };
-    Plotly.update(historyDiv, data_update);
+  Plotly.update(historyDiv, data_update);
 }
 
-function changeBgcolor() {
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-    bgcolor = event.matches ? '#191919' : '#fff';
-    titlecolor = event.matches ? '#cecece' : '#595959';
+mediaQuery.addEventListener('change', () => {
+  const modeOverride = localStorage.getItem('color-mode')
+  if (modeOverride) {
+    bgcolor = modeOverride === 'dark' ? '#191919' : '#fff';
+    titlecolor = modeOverride === 'dark' ? '#cecece' : '#595959';
+  } else {
+    bgcolor = mediaQuery.matches ? '#191919' : '#fff';
+    titlecolor = mediaQuery.matches ? '#cecece' : '#595959';
+  }
+  changeBgcolor();
+});
 
-
-    const layout_update = {
-      paper_bgcolor: bgcolor,
-      plot_bgcolor: bgcolor,
-      font: {
-        color: titlecolor,
-      },
+[...themeSwitchers].forEach((radio) => {
+  radio.addEventListener('change', (event) => {
+    if (event?.target?.value !== 'auto') {
+      bgcolor = event.target.value === 'dark' ? '#191919' : '#fff';
+      titlecolor = event.target.value === 'dark' ? '#cecece' : '#595959';
+    } else {
+      bgcolor = mediaQuery.matches ? '#191919' : '#fff';
+      titlecolor = mediaQuery.matches ? '#cecece' : '#595959';
     }
+    changeBgcolor();
+  })
+});
 
-    fields.map((field) => {
-      Plotly.update(document.querySelector(`#${field}-chart`), {}, layout_update);
-      Plotly.update(document.querySelector(`#${field}-gauge`), {}, layout_update);
-    })
+
+function changeBgcolor() {
+  const layout_update = {
+    paper_bgcolor: bgcolor,
+    plot_bgcolor: bgcolor,
+    font: {
+      color: titlecolor,
+    },
+  }
+
+  fields.map((field) => {
+    Plotly.update(document.querySelector(`#${field}-chart`), {}, layout_update);
+    Plotly.update(document.querySelector(`#${field}-gauge`), {}, layout_update);
   })
 }
 
@@ -99,9 +121,9 @@ function init() {
   updateSensorReadings();
   updateLastData();
   loop();
-  changeBgcolor();
 }
 
-window.onload = (e) => {
+
+window.addEventListener('load', () => {
   init();
-}
+})
