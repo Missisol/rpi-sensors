@@ -17,9 +17,10 @@ function getProcessedFields(str) {
 }
 
 function getDeltaPlotly(fields, divs) {
-  const modeOverride = localStorage.getItem('color-mode')
+  const modeOverride = localStorage.getItem('color-mode');
   const { bgcolor, titlecolor } = getColors(modeOverride, modeOverride);
   const dataArr = getFilteredDataArr(fields, lineChartDataArr);
+
   dataArr.forEach((data, idx) => {
     const trace1 = {
       x: [],
@@ -54,6 +55,9 @@ function getDeltaPlotly(fields, divs) {
       colorway: [data.color],
       paper_bgcolor: bgcolor,
       plot_bgcolor: bgcolor,
+      yaxis: {
+        gridcolor: '#808080',
+      },
     };
   
     Plotly.newPlot(divs[idx], traces, layout, config);
