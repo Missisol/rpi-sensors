@@ -93,9 +93,9 @@ function getGaugePlotly(fields, divs) {
 }
 
 function getHystoryPlotly(fields, divs) {
-  const modeOverride = localStorage.getItem('color-mode')
+  const modeOverride = localStorage.getItem('color-mode');
   const { bgcolor, titlecolor } = getColors(modeOverride, modeOverride);
-  const dataArr = getDataArr(fields, 'historyDataArr')
+  const dataArr = getDataArr(fields, 'historyDataArr');
 
   dataArr.forEach((data, idx) => {
     const trace = {
@@ -117,6 +117,9 @@ function getHystoryPlotly(fields, divs) {
       colorway: [data.color],
       paper_bgcolor: bgcolor,
       plot_bgcolor: bgcolor,
+      yaxis: {
+        gridcolor: '#808080',
+      },
     };
     Plotly.newPlot(divs[idx], [trace], layout, config);
   })

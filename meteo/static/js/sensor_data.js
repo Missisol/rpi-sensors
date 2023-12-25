@@ -18,7 +18,7 @@ function updateSensorReadings() {
       const res = jsonResponse.results[0]
 
       const localDate = new Date(res.full_date).toLocaleString('ru');
-      const dateEl = document.querySelector('#local-date')
+      const dateEl = document.querySelector('#local-date');
       dateEl.innerHTML = localDate;
 
       fields.forEach((field) => {

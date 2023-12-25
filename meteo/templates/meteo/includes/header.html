@@ -2,12 +2,16 @@
 <link rel="stylesheet" href="{% static 'css/header.css' %}">
 
 <header class="header">
-  <div class="header__switch-box">
-    <div>
+  <fieldset class="header__switch-box">
+    <div class="switch-group">
       <input type="radio" name="theme-switch" value="dark" id="toggle-dark" class="theme-switch theme-switch--dark">
       <label for="toggle-dark">Темная</label>
+    </div>
+    <div class="switch-group">
       <input type="radio" name="theme-switch" value="light" id="toggle-light" class="theme-switch theme-switch--light">
       <label for="toggle-light">Светлая</label>
+    </div>
+    <div class="switch-group">
       <input type="radio" name="theme-switch" value="auto" id="toggle-auto" class="theme-switch theme-switch--auto">
       <label for="toggle-auto">Авто</label>
     </div>
@@ -16,7 +20,7 @@
         ? document.querySelector(`.theme-switch[value=${colorModeOverride}`).checked = true
         : document.querySelector(`.theme-switch[value=auto`).checked = true
   </script>
-  </div>
+  </fieldset>
   <nav class="header__nav">
     <ul class="header__links">
         {% for x, y, z in menu %}

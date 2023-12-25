@@ -100,7 +100,7 @@
   grid-template-columns:
     [full-start] 1fr [container-start] minmax(0, 1100px) [container-end] 1fr [full-end];
   grid-template-rows: auto 1fr auto;
-  column-gap: var(--gap);
+  gap: var(--gap);
 }
 
 .container > * {
