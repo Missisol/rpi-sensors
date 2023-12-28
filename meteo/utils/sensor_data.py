@@ -1,12 +1,12 @@
 box1 = [
     {
         'dataName': "Температура, &deg;C",
-        'className': 'bx bxs-thermometer readings',
+        'className': 'sensor-icon--temperature',
         'id': 'temperature',
     }, 
     {
         'dataName': "Влажность, %", 
-        'className': 'bx bxs-droplet-half readings readings--two',
+        'className': 'sensor-icon--humidity',
         'id': 'humidity',
     }, 
 ]
@@ -14,7 +14,7 @@ box1 = [
 box2 = [
      {
         'dataName': "Давление, мм.рт.ст.", 
-        'className': 'bx bxs-tachometer readings readings--three',
+        'className': 'sensor-icon--pressure',
         'id': 'pressure',
     },
 ]
