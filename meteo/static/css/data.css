@@ -46,16 +46,18 @@
   font-size: 20px;
 }
 
-.readings {
-  font-size: 30px;
-  color: var(--base-green-color);
-}
-
-.readings--two {
+.icon-wrapper {
   color: var(--base-blue-color);
 }
 
-.readings--three {
-  color: var(--base-grey-color);
+.sensor-icon--temperature {
+  color: var(--base-green-color);
 }
 
+.sensor-icon--humidity {
+  color: var(--base-blue-color);
+}
+
+.sensor-icon--pressure {
+  color: var(--base-grey-color);
+}
