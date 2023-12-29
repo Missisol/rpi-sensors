@@ -1,0 +1,9 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--gap) * 2);
+}
+
+.home__subtitle {
+  margin-bottom: var(--gap);
+}

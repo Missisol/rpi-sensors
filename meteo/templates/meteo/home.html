@@ -1,0 +1,22 @@
+{% extends 'meteo/base.html' %}
+{% load static %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="home">
+    {% for x, y, z, k in menu %}
+      <article class="home__article">
+        <a href="{{ x }}">
+          <h3 class="home__subtitle">{{ z }}</h3>
+        </a>  
+        <p>{{ k }}</p>
+      </article>
+    {% endfor %}
+  </div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}
