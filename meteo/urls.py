@@ -5,8 +5,11 @@ from meteo.views.bme_history import BmeHistoryView
 from meteo.views.dht_data import Dht1DataView, Dht2DataView
 from meteo.views.dht_history import Dht1HistoryView, Dht2HistoryView
 
+from meteo.views.home import HomePageView
+
 urlpatterns = [
   path("api/", include("meteo.api.api_urls")),
+  path("", HomePageView.as_view(), name="home"),
   path("bme/", BmeDataView.as_view(), name="bme"),
   path("bme-history/", BmeHistoryView.as_view(), name="bme-history"),
   path("dht1/", Dht1DataView.as_view(), name="dht1"),
