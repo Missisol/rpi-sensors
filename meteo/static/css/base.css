@@ -28,6 +28,7 @@
     --light-green-color: #aaffa9;
     --base-red-color: #ff0000;
     --light-red-color: #ef7985;
+    --base-magenta-color: #cc66ff;
 
     --gap: 1rem;
   }
@@ -46,6 +47,7 @@
       --light-green-color: #aaffa9;
       --base-red-color: #ff0000;
       --light-red-color: #ef7985;
+      --base-magenta-color: #cc66ff;
     }
   }
 
@@ -61,6 +63,7 @@
     --light-green-color: #aaffa9;
     --base-red-color: #ff0000;
     --light-red-color: #ef7985;
+    --base-magenta-color: #cc66ff;
   }
 
 

@@ -57,7 +57,7 @@
       {% for el in item.box %}
         <div class="box">
           <svg width="30" height="30">
-            <use xlink:href="#{{ el.id }}-icon" class="{{ el.className }}" />
+            <use xlink:href="#{{ el.id }}-icon" class="sensor-icon--{{ el.id }}" />
           </svg>
           <div class="box__content">
             {% autoescape off %}
