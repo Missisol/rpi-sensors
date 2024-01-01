@@ -14,7 +14,7 @@ const dataFields = ['temperature', 'humidity', 'pressure'];
 const lineChartDataArr = [
   { name: 'temperature', legend: 'температура', text: 'Температура', color: '#3ba639' },
   { name: 'humidity', legend: 'влажность', text: 'Влажность', color: '#047df3' },
-  { name: 'pressure', legend: 'давление', text: 'Давление', color: '#3d3c3c' },
+  { name: 'pressure', legend: 'давление', text: 'Давление', color: '#CC66FF' },
 ];
 
 const getFields = (str) => {

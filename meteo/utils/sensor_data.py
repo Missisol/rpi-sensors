@@ -1,12 +1,10 @@
 box1 = [
     {
         'dataName': "Температура, &deg;C",
-        'className': 'sensor-icon--temperature',
         'id': 'temperature',
     }, 
     {
         'dataName': "Влажность, %", 
-        'className': 'sensor-icon--humidity',
         'id': 'humidity',
     }, 
 ]
@@ -14,7 +12,6 @@ box1 = [
 box2 = [
      {
         'dataName': "Давление, мм.рт.ст.", 
-        'className': 'sensor-icon--pressure',
         'id': 'pressure',
     },
 ]

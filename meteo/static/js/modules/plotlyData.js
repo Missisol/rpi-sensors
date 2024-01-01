@@ -120,6 +120,10 @@ function getHystoryPlotly(fields, divs) {
       yaxis: {
         gridcolor: '#808080',
       },
+      margin: {
+        l: 0,
+        r: 0,
+      },
     };
     Plotly.newPlot(divs[idx], [trace], layout, config);
   })
