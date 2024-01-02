@@ -1,1 +1,3 @@
 mysqlclient==2.2.0
+django-pwa==1.1.0
+
