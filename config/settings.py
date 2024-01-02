@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'rest_framework',
     "corsheaders",
     'django_filters',
+    'pwa',
 ]
 
 MIDDLEWARE = [
@@ -82,6 +83,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'meteo.utils.context_processors.get_menu',
+                'meteo.utils.context_processors.get_nested_menu',
             ],
         },
     },
@@ -179,3 +181,33 @@ REST_FRAMEWORK = {
 INTERNAL_IPS = ['127.0.0.1']
 
 DHT_URL = env('DHT_URL')
+
+PWA_APP_NAME = 'RPI датчики'
+PWA_APP_DESCRIPTION = "RPI датчики"
+PWA_APP_THEME_COLOR = '#0A0302'
+PWA_APP_BACKGROUND_COLOR = '#ffffff'
+PWA_APP_DISPLAY = 'standalone'
+PWA_APP_SCOPE = '/'
+PWA_APP_ORIENTATION = 'any'
+PWA_APP_START_URL = '/'
+PWA_APP_STATUS_BAR_COLOR = 'default'
+PWA_APP_ICONS = [
+    {
+        'src': '/static/images/android-chrome-192x192.png',
+        'sizes': '160x160'
+    }
+]
+PWA_APP_ICONS_APPLE = [
+    {
+        'src': '/static/images/apple-touch-icon.png',
+        'sizes': '160x160'
+    }
+]
+PWA_APP_SPLASH_SCREEN = [
+    {
+        'src': '/static/images/logo.svg',
+        'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'
+    }
+]
+PWA_APP_DIR = 'ltr'
+PWA_APP_LANG = 'ru-RU'
