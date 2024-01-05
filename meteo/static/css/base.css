@@ -18,6 +18,7 @@
     color-scheme: light dark; 
 
     --base-color: #fff;
+    --accent-color: #ececec;
     --base-grey-color: #595959;
     --medium-grey-color: #808080;
     --light-grey-color: #cecece;
@@ -31,12 +32,21 @@
     --base-magenta-color: #cc66ff;
 
     --gap: 1rem;
+
+    --gap-4: calc(var(--gap) / 4);
+    --gap-2: calc(var(--gap) / 2);
+
+    --gap2: calc(var(--gap) * 2);
+    --gap4: calc(var(--gap) * 4);
+
+    --helper-font-size: 14px;
   }
 
 
   @media (prefers-color-scheme: dark) {
     :root {
       --base-color: #191919;
+      --accent-color: #212020;
       --base-grey-color: #b2b0b0;
       --medium-grey-color: #808080;
       --light-grey-color: #cecece;
@@ -52,6 +62,7 @@
   }
 
   :root[data-force-color-mode='dark'] {
+    --accent-color: #212020;
     --base-color: #191919;
     --base-grey-color: #b2b0b0;
     --medium-grey-color: #808080;
@@ -112,6 +123,10 @@
 
 .container > .full-width {
   grid-column: full;
+}
+
+.full-width {
+  background: var(--accent-color);
 }
 
 .wrapper-inner {
