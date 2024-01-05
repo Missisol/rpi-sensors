@@ -5,12 +5,15 @@ import {
   getDivs, 
   setListeners, 
 } from './modules/commonData.js';
+import { minDate, getFormettedDate } from './modules/helpers.js';
 
 const pathname = document.location.pathname.replaceAll('/', '');
 const fields = getProcessedFields(pathname);
+let params = '';
+let error = '';
 
 function updateDelta() {
-  fetch(`/api/${pathname}/`)
+  fetch(`/api/${pathname}/?${params}`)
     .then((res) => res.json())
     .then((jsonRes) => {
       const res = jsonRes.results;
@@ -46,6 +49,53 @@ function changeBgcolor(bgcolor, titlecolor) {
   }
 }
 
+const setupDatePicker = () => {
+  const startInput = document.querySelector('#startDate');
+  const endInput = document.querySelector('#endDate');
+  const formattedDate = getFormettedDate();
+
+  startInput.setAttribute('min', minDate);
+  startInput.setAttribute('max', formattedDate);
+  endInput.setAttribute('min', minDate);
+  endInput.setAttribute('max', formattedDate);
+}
+
+const validateForm = (start, end) => {
+  error = start > end ? 'Начало периода позже конца периода.' : ''
+  updateErrorSpan();
+}
+
+function updateErrorSpan() {
+  const errorEl = document.querySelector('#formError');
+  errorEl.innerHTML = error;
+}
+
+function setupForm() {
+  setupDatePicker();
+
+  const buttonResetEl = document.querySelector('#buttonReset');
+  buttonResetEl.addEventListener('click', () => {
+    params = '';
+    error = '';
+    updateErrorSpan();
+    updateDelta();
+  });
+}
+
+function initForm() {
+  const formEl = document.querySelector('#historyForm');
+  formEl.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    validateForm(formEl.start_date.value, formEl.end_date.value);  
+
+    if (!error) {
+      params = `start_date=${formEl.start_date.value}&end_date=${formEl.end_date.value}`;
+      updateDelta();
+    }
+  });
+}
+
 function loop() {
   setTimeout(() => {
     updateDelta();
@@ -57,6 +107,8 @@ function init() {
   setListeners(changeBgcolor);
   getDeltaPlotly(Object.keys(fields), getDivs('.charts__chart'));
   updateDelta();
+  initForm();
+  setupForm();
   loop();
 }
 
