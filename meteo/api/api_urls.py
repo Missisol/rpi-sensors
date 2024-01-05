@@ -1,7 +1,6 @@
 from django.urls import include, path
 from rest_framework.urlpatterns import format_suffix_patterns
 
-# from meteo.api import views
 from meteo.api.views import BmeViewSet, BmeLastViewSet, BmeHistoryViewSet, Dht1ViewSet, Dht1LastViewSet, Dht1HistoryViewSet, Dht2ViewSet, Dht2LastViewSet, Dht2HistoryViewSet
 
 
