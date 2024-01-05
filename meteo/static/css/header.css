@@ -57,7 +57,7 @@
   display: grid;
   place-items: center;
   inline-size: max-content;
-  padding: calc(var(--gap) / 4) calc(var(--gap) / 2);
+  padding: var(--gap-4) var(--gap-2);
   border-radius: 10px;
   border: 1px solid transparent;
   transition: background-color .1s ease-in;
@@ -154,12 +154,12 @@ html[data-force-color-mode=light]  .switch-group:has(:checked) {
 }
 
 .clicky-menu a {
-  padding: var(--gap) var(--gap) var(--gap) calc(var(--gap) * 2);
+  padding: var(--gap) var(--gap) var(--gap) var(--gap2);
  }
 
 .clicky-menu button {
-  margin: calc(var(--gap) / 4) var(--gap) 0;
-  padding: calc(var(--gap) / 4) var(--gap) 0;
+  margin: var(--gap-4) var(--gap) 0;
+  padding: var(--gap-4) var(--gap) 0;
 }
 
 .clicky-menu a:hover,
@@ -197,7 +197,7 @@ html[data-force-color-mode=light]  .switch-group:has(:checked) {
 .clicky-menu svg {
   width: var(--gap);
   height: var(--gap);
-  margin-left: calc(var(--gap) / 2);
+  margin-left: var(--gap-2);
 }
 
 .clicky-menu [aria-expanded="true"] svg {
@@ -231,7 +231,7 @@ html[data-force-color-mode=light]  .switch-group:has(:checked) {
 .clicky-menu ul {
   min-width: 100%;
   width: auto;
-  margin-top: calc(var(--gap) / 4);
+  margin-top: var(--gap-4);
   padding: 0;
   list-style: none;
   background: var(--base-color);
