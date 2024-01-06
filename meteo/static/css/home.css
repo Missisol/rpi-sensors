@@ -1,7 +1,11 @@
 .home {
   display: flex;
   flex-direction: column;
-  gap: calc(var(--gap) * 2);
+  gap: var(--gap2);
+}
+
+.home__link {
+  color: var(--base-blue-color);
 }
 
 .home__subtitle {

@@ -1,5 +1,5 @@
 .section {
-  margin-bottom: calc(var(--gap) * 2);
+  margin-bottom: var(--gap2);
 }
 
 /* Gauge styles */
