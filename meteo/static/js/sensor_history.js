@@ -90,7 +90,7 @@ function initForm() {
     validateForm(formEl.start_date.value, formEl.end_date.value);  
 
     if (!error) {
-      params = `start_date=${formEl.start_date.value}&end_date=${formEl.end_date.value}`;
+      params = `start_date=${formEl.start_date.value}&end_date=${formEl.end_date.value}&limit=2000`;
       updateDelta();
     }
   });
