@@ -59,7 +59,7 @@ function getDeltaPlotly(fields, divs) {
         gridcolor: '#808080',
       },
       margin: {
-        l: 0,
+        l: 40,
         r: 0,
       },
     };
