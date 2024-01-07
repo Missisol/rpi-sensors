@@ -236,6 +236,7 @@ html[data-force-color-mode=light]  .switch-group:has(:checked) {
   list-style: none;
   background: var(--base-color);
   border: 1px solid var(--base-blue-color);
+  border-radius: var(--gap-2);
   z-index: 10;
 }
 
