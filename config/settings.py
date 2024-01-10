@@ -82,7 +82,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'meteo.utils.context_processors.get_menu',
+                'meteo.utils.context_processors.get_dashboard',
                 'meteo.utils.context_processors.get_nested_menu',
             ],
         },
