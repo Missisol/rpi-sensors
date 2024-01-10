@@ -49,7 +49,7 @@
             {% autoescape off %}
             <div class="box__title">{{ el.dataName }}</div>
             {% endautoescape %}
-            <div class="box__data" id="{{ el.id }}"></div>
+            <div class="box__data box__data--{{ el.id }}" id="{{ el.id }}"></div>
           </div>
         </div>
       {% endfor %}
