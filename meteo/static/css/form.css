@@ -49,3 +49,12 @@
   font-size: var(--helper-font-size);
   color: var(--base-red-color);
 }
+
+.popup-button {
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  background: var(--base-color);
+  color: var(--base-grey-color);
+  border: none;
+}
