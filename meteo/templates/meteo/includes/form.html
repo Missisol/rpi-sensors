@@ -2,22 +2,22 @@
 
 {% include 'meteo/includes/icon_arrow.html' %}
 
-<section class="section__form menu">
-  <div class="menu__contents">
-    <div class="menu__title">
+<section class="section__form box">
+  <div class="box__contents">
+    <div class="box__title">
       <button class="button__toggle ">
-        <h3 class="form__header">Изменить период графиков</h3>
+        <h3 class="button__header">Изменить период графиков</h3>
         <svg aria-hidden="true" width="16" height="16">
           <use xlink:href="#arrow" />
         </svg>
       </button>
     </div>
     <form id="history-form" class="form" name="history-form">
-      <p class="form__wrapper">
+      <p class="form__input-wrapper">
         <label for="start-date" class="form__label">Начало периода</label>
         <input type="date" id="start-date" name="start_date" required class="form__input">
       </p>
-      <p class="form__wrapper">
+      <p class="form__input-wrapper">
         <label for="end-date" class="form__label">Конец периода</label>
         <input type="date" id="end-date" name="end_date" required class="form__input">
       </p>

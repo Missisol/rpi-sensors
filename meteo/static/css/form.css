@@ -1,3 +1,33 @@
+.box {
+  opacity: 0;
+  pointer-events: none;
+  transform-origin: top left;
+  overflow: hidden;
+}
+
+.box--active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.box__contents {
+  transform-origin: top left;
+  will-change: transform;
+}
+
+.box__title {
+  background: var(--base-color);
+}
+
+.button__toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  background: var(--base-color);
+  color: var(--base-grey-color);
+  border: none;
+}
+
 .form {
   display: grid;
   gap: var(--gap);
@@ -5,7 +35,7 @@
   margin-block: var(--gap);
 }
 
-.form__wrapper {
+.form__input-wrapper {
   display: flex;
   gap: var(--gap-2) var(--gap);
   flex-direction: column;
@@ -50,64 +80,33 @@
   color: var(--base-red-color);
 }
 
-.button__toggle {
-  display: flex;
-  align-items: center;
-  gap: var(--gap);
-  background: var(--base-color);
-  color: var(--base-grey-color);
-  border: none;
-}
-
-
-.menu__contents {
-  transform-origin: top left;
-  will-change: transform;
-}
-
-
-.menu__title {
-  background: var(--base-color);
-}
-
-.menu {
-  opacity: 0;
-  pointer-events: none;
-  transform-origin: top left;
-  overflow: hidden;
-}
-
-.menu--active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.menu--expanded {
-  animation-name: menuExpandAnimation;
+/* Animations */
+.box--expanded {
+  animation-name: boxExpandAnimation;
   animation-duration: .2s;
   animation-timing-function: linear;
 }
 
-.menu__contents--expanded {
-  animation-name: menuExpandContentsAnimation;
-  animation-duration: .2s;
-  animation-timing-function: linear;
-}
-
-.menu--collapsed {
-  animation-name: menuCollapseAnimation;
-  animation-duration: .2s;
-  animation-timing-function: linear;
-}
-
-.menu__contents--collapsed {
-  animation-name: menuCollapseContentsAnimation;
+.box__contents--expanded {
+  animation-name: boxExpandContentsAnimation;
   animation-duration: .2s;
   animation-timing-function: linear;
 }
 
 .charts--expanded {
   animation-name: chartsExpandAnimation;
+  animation-duration: .2s;
+  animation-timing-function: linear;
+}
+
+.box--collapsed {
+  animation-name: boxCollapseAnimation;
+  animation-duration: .2s;
+  animation-timing-function: linear;
+}
+
+.box__contents--collapsed {
+  animation-name: boxCollapseContentsAnimation;
   animation-duration: .2s;
   animation-timing-function: linear;
 }

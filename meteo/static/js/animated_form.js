@@ -1,7 +1,11 @@
-const menuTitle = document.querySelector('.menu__title');
-const menu = document.querySelector('.menu');
-const menuContents = document.querySelector('.menu__contents');
-const menuToggleButton = document.querySelector('.button__toggle');
+// https://developer.chrome.com/blog/performant-expand-and-collapse
+// https://css-tricks.com/performant-expandable-animations-building-keyframes-on-the-fly/
+// https://web.dev/articles/stick-to-compositor-only-properties-and-manage-layer-count
+
+const box = document.querySelector('.box');
+const boxContents = document.querySelector('.box__contents');
+const boxTitle = document.querySelector('.box__title');
+const boxToggleButton = document.querySelector('.button__toggle');
 const charts = document.querySelector('.charts');
 
 let expanded = true;
@@ -10,13 +14,13 @@ let collapsed;
 let delta;
 
 function activate() {
-  menu.classList.add('menu--active');
+  box.classList.add('box--active');
   animate = true;
 }
 
 function calculateCollapsedScale () {
-  const elCollapsed = menuTitle.getBoundingClientRect();
-  const elExpanded = menu.getBoundingClientRect();
+  const elCollapsed = boxTitle.getBoundingClientRect();
+  const elExpanded = box.getBoundingClientRect();
   delta = elExpanded.height - elCollapsed.height;
 
   collapsed = {
@@ -30,8 +34,8 @@ function expand() {
     return;
   }
   expanded = true;
-  menu.style.transform = `scale(1, 1)`;
-  menuContents.style.transform = `scale(1, 1)`;
+  box.style.transform = `scale(1, 1)`;
+  boxContents.style.transform = `scale(1, 1)`;
   charts.style.transform = `translateY(0px)`;
 
   if (!animate) {
@@ -50,8 +54,8 @@ function collapse() {
   const invX = 1 / x;
   const invY = 1 / y;
 
-  menu.style.transform = `scale(${x}, ${y})`;
-  menuContents.style.transform = `scale(${invX}, ${invY})`;
+  box.style.transform = `scale(${x}, ${y})`;
+  boxContents.style.transform = `scale(${invX}, ${invY})`;
   charts.style.transform = `translateY(-${delta}px)`;
 
   if (!animate) {
@@ -66,43 +70,43 @@ function toggle() {
 }
 
 function addEventListenerOnMenu() {
-  menuToggleButton.addEventListener('click', toggle);
+  boxToggleButton.addEventListener('click', toggle);
 }
 
 function applyAnimation({expand}) {
-  menu.classList.remove('menu--expanded');
-  menu.classList.remove('menu--collapsed');
-  menuContents.classList.remove('menu__contents--expanded');
-  menuContents.classList.remove('menu__contents--collapsed');
+  box.classList.remove('box--expanded');
+  box.classList.remove('box--collapsed');
+  boxContents.classList.remove('box__contents--expanded');
+  boxContents.classList.remove('box__contents--collapsed');
   charts.classList.remove('charts--expanded');
   charts.classList.remove('charts--collapsed');
 
-  window.getComputedStyle(menu).transform;
+  window.getComputedStyle(box).transform;
 
   if (expand) {
-    menu.classList.add('menu--expanded');
-    menuContents.classList.add('menu__contents--expanded');
+    box.classList.add('box--expanded');
+    boxContents.classList.add('box__contents--expanded');
     charts.classList.add('charts--expanded');
     return;
   }
-  menu.classList.add('menu--collapsed');
-  menuContents.classList.add('menu__contents--collapsed');
+  box.classList.add('box--collapsed');
+  boxContents.classList.add('box__contents--collapsed');
   charts.classList.add('charts--collapsed');
 }
 
 function createEaseAnimation() {
-  let menuEase = document.querySelector('.menu-ease');
-    if (menuEase) {
-    return menuEase;
+  let boxEase = document.querySelector('.box-ease');
+    if (boxEase) {
+    return boxEase;
   }
 
-  menuEase = document.createElement('style');
-  menuEase.classList.add('menu-ease');
+  boxEase = document.createElement('style');
+  boxEase.classList.add('box-ease');
 
-  const menuExpandAnimation = [];
-  const menuExpandContentsAnimation = [];
-  const menuCollapseAnimation = [];
-  const menuCollapseContentsAnimation = [];
+  const boxExpandAnimation = [];
+  const boxExpandContentsAnimation = [];
+  const boxCollapseAnimation = [];
+  const boxCollapseContentsAnimation = [];
   const chartsExpandAnimation = [];
   const chartsCollapseAnimation = [];
 
@@ -117,8 +121,8 @@ function createEaseAnimation() {
       startY: collapsed.y,
       endX: 1,
       endY: 1,
-      outerAnimation: menuExpandAnimation,
-      innerAnimation: menuExpandContentsAnimation,
+      outerAnimation: boxExpandAnimation,
+      innerAnimation: boxExpandContentsAnimation,
     });
 
     // Collapse animation
@@ -129,8 +133,8 @@ function createEaseAnimation() {
       startY: 1,
       endX: collapsed.x,
       endY: collapsed.y,
-      outerAnimation: menuCollapseAnimation,
-      innerAnimation: menuCollapseContentsAnimation,
+      outerAnimation: boxCollapseAnimation,
+      innerAnimation: boxCollapseContentsAnimation,
     });
 
     // Both translate animations
@@ -143,25 +147,25 @@ function createEaseAnimation() {
     });
   }
 
-    menuEase.textContent = `
-    @keyframes menuExpandAnimation {
-      ${menuExpandAnimation.join('')}
+    boxEase.textContent = `
+    @keyframes boxExpandAnimation {
+      ${boxExpandAnimation.join('')}
     }
 
-    @keyframes menuExpandContentsAnimation {
-      ${menuExpandContentsAnimation.join('')}
+    @keyframes boxExpandContentsAnimation {
+      ${boxExpandContentsAnimation.join('')}
     }
 
     @keyframes chartsExpandAnimation {
       ${chartsExpandAnimation.join('')}
     }
     
-    @keyframes menuCollapseAnimation {
-      ${menuCollapseAnimation.join('')}
+    @keyframes boxCollapseAnimation {
+      ${boxCollapseAnimation.join('')}
     }
 
-    @keyframes menuCollapseContentsAnimation {
-      ${menuCollapseContentsAnimation.join('')}
+    @keyframes boxCollapseContentsAnimation {
+      ${boxCollapseContentsAnimation.join('')}
     }
 
     @keyframes chartsCollapseAnimation {
@@ -169,8 +173,8 @@ function createEaseAnimation() {
     }`;
 
 
-  document.head.appendChild(menuEase);
-  return menuEase;
+  document.head.appendChild(boxEase);
+  return boxEase;
 }
 
 function append ({
