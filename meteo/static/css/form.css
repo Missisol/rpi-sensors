@@ -10,6 +10,10 @@
   pointer-events: auto;
 }
 
+.box--expanded svg.button__arrow {
+  transform: scale(-1);
+}
+
 .box__contents {
   transform-origin: top left;
   will-change: transform;

@@ -137,7 +137,7 @@ function createEaseAnimation() {
       innerAnimation: boxCollapseContentsAnimation,
     });
 
-    // Both translate animations
+    // Translate animations
     getTranslate({
       i,
       step,
@@ -171,7 +171,6 @@ function createEaseAnimation() {
     @keyframes chartsCollapseAnimation {
       ${chartsCollapseAnimation.join('')}
     }`;
-
 
   document.head.appendChild(boxEase);
   return boxEase;
@@ -225,7 +224,6 @@ function getTranslate({
     }`);
 }
 
-
 function clamp (value, min, max) {
   return Math.max(min, Math.min(max, value));
 }
@@ -235,8 +233,6 @@ function ease (v, pow=4) {
 
   return 1 - Math.pow(1 - v, pow);
 }
-
-
 
 function init() {
   calculateCollapsedScale();
