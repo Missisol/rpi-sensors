@@ -1,18 +1,31 @@
-<section class="section__form">
-  <h3 class="form__header">Изменить период графиков</h3>
-  <form id="historyForm" class="form" name="historyForm">
-    <p class="form__wrapper">
-      <label for="startDate" class="form__label">Начало периода</label>
-      <input type="date" id="startDate" name="start_date" required class="form__input">
-    </p>
-    <p class="form__wrapper">
-      <label for="endDate" class="form__label">Конец периода</label>
-      <input type="date" id="endDate" name="end_date" required class="form__input">
-    </p>
-    <div class="form__buttons">
-      <input type="submit" id="buttonSubmit" value="Задать период" class="form__button">
-      <input type="reset" id="buttonReset" value="Очистить" class="form__button">
+{% load static %}
+
+{% include 'meteo/includes/icon_arrow.html' %}
+
+<section class="section__form menu">
+  <div class="menu__contents">
+    <div class="menu__title">
+      <button class="button__toggle ">
+        <h3 class="form__header">Изменить период графиков</h3>
+        <svg aria-hidden="true" width="16" height="16">
+          <use xlink:href="#arrow" />
+        </svg>
+      </button>
     </div>
-  </form>
-  <span id="formError" class="form__error"></span>
+    <form id="history-form" class="form" name="history-form">
+      <p class="form__wrapper">
+        <label for="start-date" class="form__label">Начало периода</label>
+        <input type="date" id="start-date" name="start_date" required class="form__input">
+      </p>
+      <p class="form__wrapper">
+        <label for="end-date" class="form__label">Конец периода</label>
+        <input type="date" id="end-date" name="end_date" required class="form__input">
+      </p>
+      <div class="form__buttons">
+        <input type="submit" id="button-submit" value="Задать период" class="form__button">
+        <input type="reset" id="button-reset" value="Очистить" class="form__button">
+      </div>
+    </form>
+    <span id="form-error" class="form__error"></span>
+  </div>
 </section>

@@ -1,9 +1,9 @@
 import { getProcessedFields, getDeltaPlotly } from './modules/plotlyHistory.js';
-import { 
-  timer, 
-  getDataForLineChart, 
-  getDivs, 
-  setListeners, 
+import {
+  timer,
+  getDataForLineChart,
+  getDivs,
+  setListeners,
 } from './modules/commonData.js';
 import { minDate, getFormettedDate } from './modules/helpers.js';
 
@@ -19,7 +19,7 @@ function updateDelta() {
       const res = jsonRes.results;
       const datesArr = getDataForLineChart(res, 'date');
 
-      for (const [key, value] of  Object.entries(fields)) {
+      for (const [key, value] of Object.entries(fields)) {
         const y = []
         value.forEach((val) => {
           y.push(getDataForLineChart(res, val));
@@ -32,7 +32,7 @@ function updateDelta() {
           },
         )
       };
-  })
+    })
 }
 
 function changeBgcolor(bgcolor, titlecolor) {
@@ -43,15 +43,15 @@ function changeBgcolor(bgcolor, titlecolor) {
       color: titlecolor,
     },
   }
-  
+
   for (const [key, value] of Object.entries(fields)) {
     Plotly.update(document.querySelector(`#${key}-chart`), {}, layout_update);
   }
 }
 
 const setupDatePicker = () => {
-  const startInput = document.querySelector('#startDate');
-  const endInput = document.querySelector('#endDate');
+  const startInput = document.querySelector('#start-date');
+  const endInput = document.querySelector('#end-date');
   const formattedDate = getFormettedDate();
 
   startInput.setAttribute('min', minDate);
@@ -66,14 +66,14 @@ const validateForm = (start, end) => {
 }
 
 function updateErrorSpan() {
-  const errorEl = document.querySelector('#formError');
+  const errorEl = document.querySelector('#form-error');
   errorEl.innerHTML = error;
 }
 
 function setupForm() {
   setupDatePicker();
 
-  const buttonResetEl = document.querySelector('#buttonReset');
+  const buttonResetEl = document.querySelector('#button-reset');
   buttonResetEl.addEventListener('click', () => {
     params = '';
     error = '';
@@ -83,11 +83,11 @@ function setupForm() {
 }
 
 function initForm() {
-  const formEl = document.querySelector('#historyForm');
+  const formEl = document.querySelector('#history-form');
   formEl.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    validateForm(formEl.start_date.value, formEl.end_date.value);  
+    validateForm(formEl.start_date.value, formEl.end_date.value);
 
     if (!error) {
       params = `start_date=${formEl.start_date.value}&end_date=${formEl.end_date.value}&limit=2000`;

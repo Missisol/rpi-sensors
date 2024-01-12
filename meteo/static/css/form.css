@@ -50,7 +50,7 @@
   color: var(--base-red-color);
 }
 
-.popup-button {
+.button__toggle {
   display: flex;
   align-items: center;
   gap: var(--gap);
@@ -58,3 +58,63 @@
   color: var(--base-grey-color);
   border: none;
 }
+
+
+.menu__contents {
+  transform-origin: top left;
+  will-change: transform;
+}
+
+
+.menu__title {
+  background: var(--base-color);
+}
+
+.menu {
+  opacity: 0;
+  pointer-events: none;
+  transform-origin: top left;
+  overflow: hidden;
+}
+
+.menu--active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.menu--expanded {
+  animation-name: menuExpandAnimation;
+  animation-duration: .2s;
+  animation-timing-function: linear;
+}
+
+.menu__contents--expanded {
+  animation-name: menuExpandContentsAnimation;
+  animation-duration: .2s;
+  animation-timing-function: linear;
+}
+
+.menu--collapsed {
+  animation-name: menuCollapseAnimation;
+  animation-duration: .2s;
+  animation-timing-function: linear;
+}
+
+.menu__contents--collapsed {
+  animation-name: menuCollapseContentsAnimation;
+  animation-duration: .2s;
+  animation-timing-function: linear;
+}
+
+.charts--expanded {
+  animation-name: chartsExpandAnimation;
+  animation-duration: .2s;
+  animation-timing-function: linear;
+}
+
+.charts--collapsed {
+  animation-name: chartsCollapseAnimation;
+  animation-duration: .2s;
+  animation-timing-function: linear;
+}
+
