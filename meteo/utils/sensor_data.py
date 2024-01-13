@@ -1,3 +1,10 @@
+box0 = [
+     {
+        'dataName': "Даные на", 
+        'id': 'date',
+    },
+]
+
 box1 = [
     {
         'dataName': "Температура, &deg;C",
@@ -17,6 +24,10 @@ box2 = [
 ]
 
 box3 = [*box1, *box2]
+
+box4 = [*box0, *box1]
+
+box5 = [*box0, *box3]
 
 gauge1 = [
     'temperature',

@@ -1,0 +1,123 @@
+.box {
+  opacity: 0;
+  pointer-events: none;
+  transform-origin: top left;
+  overflow: hidden;
+}
+
+.box--active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.box--expanded svg.button__arrow {
+  transform: scale(-1);
+}
+
+.box__contents {
+  transform-origin: top left;
+  will-change: transform;
+}
+
+.box__title {
+  background: var(--base-color);
+}
+
+.button__toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  background: var(--base-color);
+  color: var(--base-grey-color);
+  border: none;
+}
+
+.form {
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: repeat(auto-fill, minmax(max-content, 300px));
+  margin-block: var(--gap);
+}
+
+.form__input-wrapper {
+  display: flex;
+  gap: var(--gap-2) var(--gap);
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form__buttons {
+  display: flex;
+  gap: var(--gap);
+  margin-top: var(--gap);
+  align-items: flex-end;
+}
+
+@media (width >= 700) {
+  .form__input {
+    appearance: none;
+  }
+}
+
+.form__input {
+  padding: var(--gap-4) var(--gap);
+  border-radius: var(--gap-2);
+  background-color: var(--medium-grey-color);
+}
+
+.form__button {
+  appearance: none;
+  border: none;
+  padding: var(--gap-2) var(--gap);
+  border-radius: var(--gap-2);
+  background-color: var(--base-blue-color);
+  cursor: pointer;
+  transition: background-color .1s ease-in-out;
+}
+
+.form__button:active {
+  background-color: var(--medium-blue-color);
+}
+
+.form__error {
+  font-size: var(--helper-font-size);
+  color: var(--base-red-color);
+}
+
+/* Animations */
+.box--expanded {
+  animation-name: boxExpandAnimation;
+  animation-duration: .2s;
+  animation-timing-function: linear;
+}
+
+.box__contents--expanded {
+  animation-name: boxExpandContentsAnimation;
+  animation-duration: .2s;
+  animation-timing-function: linear;
+}
+
+.charts--expanded {
+  animation-name: chartsExpandAnimation;
+  animation-duration: .2s;
+  animation-timing-function: linear;
+}
+
+.box--collapsed {
+  animation-name: boxCollapseAnimation;
+  animation-duration: .2s;
+  animation-timing-function: linear;
+}
+
+.box__contents--collapsed {
+  animation-name: boxCollapseContentsAnimation;
+  animation-duration: .2s;
+  animation-timing-function: linear;
+}
+
+.charts--collapsed {
+  animation-name: chartsCollapseAnimation;
+  animation-duration: .2s;
+  animation-timing-function: linear;
+}
+
