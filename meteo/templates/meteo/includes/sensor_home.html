@@ -1,0 +1,17 @@
+<section class="section">
+  <div class="wrapper box-wrapper">
+    {% for el in box_list %}
+      <div class="box">
+        <svg aria-hidden="true" width="30" height="30">
+          <use xlink:href="#{{ el.id }}-icon" class="sensor-icon--{{ el.id }}" />
+        </svg>
+        <div class="box__content">
+          {% autoescape off %}
+          <div class="box__title">{{ el.dataName }}</div>
+          {% endautoescape %}
+          <div class="box__data box__data--{{ el.id }}" id="{{ x }}-{{ el.id }}"></div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>

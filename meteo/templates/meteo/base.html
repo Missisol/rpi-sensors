@@ -1,21 +1,43 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    {% load pwa %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RPI meteo</title>
+    {% progressive_web_app_meta %}
+    {% block title %}
+      <title>
+        {% if debug %}
+          Test - {{ page_title }} 
+        {% else %}
+          {{ page_title }}
+        {% endif %}
+      </title>
+    {% endblock %} 
+    {% load static %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link
-    href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-    rel="stylesheet"
-    >
+    
+    {% if debug %}
+      <!-- Добавление фавиконки только для developer mode -->
+      <link rel="shortcut icon" href="{% static 'favicon-dev.ico' %}">
+    {% endif %}
 
-    {% load static %}
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+
     <script src="{% static 'js/plotly-2.25.2.min.js' %}" charset="utf-8"></script>
+    <script>
+      // Check if there's any override. If so, let the markup know by setting an attribute on the <html> element
+      const colorModeOverride = window.localStorage.getItem('color-mode');
+      const hasColorModeOverride = typeof colorModeOverride === 'string';
+      if (hasColorModeOverride) {
+          document.documentElement.setAttribute('data-force-color-mode', colorModeOverride);
+      }
+    </script>    
+    <script src="{% static 'js/theme-switch.js' %}"></script>
 
     {% block styles %}{% endblock %}
 </head>
@@ -36,6 +58,8 @@
       </div>
     </div>
   </div>
+  <script src="{% static 'js/main_menu.js' %}"></script>
+
 {% block script %}{% endblock %}
 </body>
 </html>

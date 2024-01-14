@@ -1,11 +1,9 @@
-import { config, lineChartDataArr, getFilteredDataArr } from './commonData.js';
-
-/* Gauge layout */
-const layout = { 
-  width: 300,
-  height: 250, 
-  margin: { t: 30, b: 30, l: 30, r: 30 },
-};
+import { 
+  config, 
+  lineChartDataArr, 
+  getFilteredDataArr, 
+  getColors, 
+} from './commonData.js';
 
 const gaugeDataArr = [
   { 
@@ -54,9 +52,11 @@ function getDataArr(fields, plotArrName) {
     :  lineChartDataArr
 
   return getFilteredDataArr(fields, dataArr)
-};
+}
 
 function getGaugePlotly(fields, divs) {
+  const modeOverride = localStorage.getItem('color-mode')
+  const { bgcolor, titlecolor } = getColors(modeOverride, modeOverride);
   const dataArr = getDataArr(fields, 'gaugeDataArr')
 
   dataArr.forEach((data, idx) => {
@@ -77,12 +77,25 @@ function getGaugePlotly(fields, divs) {
         },
       },
     ];
+    const layout = { 
+      width: 300,
+      height: 250, 
+      margin: { t: 30, b: 30, l: 30, r: 30 },
+      paper_bgcolor: bgcolor,
+      plot_bgcolor: bgcolor,
+      font: {
+        color: titlecolor,
+      },
+    };
+    
     Plotly.newPlot(divs[idx], trace, layout, config);
   })
-};
+}
 
 function getHystoryPlotly(fields, divs) {
-  const dataArr = getDataArr(fields, 'historyDataArr')
+  const modeOverride = localStorage.getItem('color-mode');
+  const { bgcolor, titlecolor } = getColors(modeOverride, modeOverride);
+  const dataArr = getDataArr(fields, 'historyDataArr');
 
   dataArr.forEach((data, idx) => {
     const trace = {
@@ -99,12 +112,21 @@ function getHystoryPlotly(fields, divs) {
       },
       font: {
         size: 14,
-        color: "#808080",
+        color: titlecolor,
       },
       colorway: [data.color],
+      paper_bgcolor: bgcolor,
+      plot_bgcolor: bgcolor,
+      yaxis: {
+        gridcolor: '#808080',
+      },
+      margin: {
+        l: 40,
+        r: 0,
+      },
     };
     Plotly.newPlot(divs[idx], [trace], layout, config);
   })
-};
+}
 
-export { getGaugePlotly, getHystoryPlotly }
+export { getGaugePlotly, getHystoryPlotly };

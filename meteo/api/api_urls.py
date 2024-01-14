@@ -1,18 +1,17 @@
 from django.urls import include, path
 from rest_framework.urlpatterns import format_suffix_patterns
 
-# from meteo.api import views
 from meteo.api.views import BmeViewSet, BmeLastViewSet, BmeHistoryViewSet, Dht1ViewSet, Dht1LastViewSet, Dht1HistoryViewSet, Dht2ViewSet, Dht2LastViewSet, Dht2HistoryViewSet
 
 
-bme_list =BmeViewSet.as_view({
+bme_list = BmeViewSet.as_view({
     'get': 'list',
 })
-bme_detail =BmeViewSet.as_view({
+bme_detail = BmeViewSet.as_view({
     'get': 'retrieve',
     'delete': 'destroy',
 })
-bme_last_list =BmeLastViewSet.as_view({
+bme_last_list = BmeLastViewSet.as_view({
     'get': 'list',
 })
 bme_history_list = BmeHistoryViewSet.as_view({
@@ -29,7 +28,7 @@ dht1_detail = Dht1ViewSet.as_view({
     'get': 'retrieve',
     'delete': 'destroy',
 })
-dht1_last_list =Dht1LastViewSet.as_view({
+dht1_last_list = Dht1LastViewSet.as_view({
     'get': 'list',
 })
 dht1_history_list = Dht1HistoryViewSet.as_view({
@@ -46,7 +45,7 @@ dht2_detail = Dht2ViewSet.as_view({
     'get': 'retrieve',
     'delete': 'destroy',
 })
-dht2_last_list =Dht2LastViewSet.as_view({
+dht2_last_list = Dht2LastViewSet.as_view({
     'get': 'list',
 })
 dht2_history_list = Dht2HistoryViewSet.as_view({

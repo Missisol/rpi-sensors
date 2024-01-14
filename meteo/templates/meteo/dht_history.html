@@ -2,14 +2,16 @@
 {% load static %}
 
 {% block styles %}
-<link rel="stylesheet" href="{% static 'css/history.css' %}">
+  <link rel="stylesheet" href="{% static 'css/form.css' %}">
 {% endblock %}
 
 {% block content %}
-  {% include 'meteo/includes/page_title.html' with title="История DHT22" %}
+  {% include 'meteo/includes/page_title.html' %}
+  {% include 'meteo/includes/form.html' %}
   {% include 'meteo/includes/sensor_dynamic.html' %}
 {% endblock %}
 
 {% block script %}
-<script type="module" src="{% static 'js/sensor_history.js' %}" charset="utf-8"></script>
+  <script type="module" src="{% static 'js/sensor_history.js' %}" charset="utf-8"></script>
+  <script type="module" src="{% static 'js/animated_form.js' %}" charset="utf-8"></script>
 {% endblock %}

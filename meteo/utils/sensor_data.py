@@ -1,12 +1,17 @@
+box0 = [
+     {
+        'dataName': "Даные на", 
+        'id': 'date',
+    },
+]
+
 box1 = [
     {
         'dataName': "Температура, &deg;C",
-        'className': 'bx bxs-thermometer readings',
         'id': 'temperature',
     }, 
     {
         'dataName': "Влажность, %", 
-        'className': 'bx bxs-droplet-half readings readings--two',
         'id': 'humidity',
     }, 
 ]
@@ -14,12 +19,15 @@ box1 = [
 box2 = [
      {
         'dataName': "Давление, мм.рт.ст.", 
-        'className': 'bx bxs-tachometer readings readings--three',
         'id': 'pressure',
     },
 ]
 
 box3 = [*box1, *box2]
+
+box4 = [*box0, *box1]
+
+box5 = [*box0, *box3]
 
 gauge1 = [
     'temperature',

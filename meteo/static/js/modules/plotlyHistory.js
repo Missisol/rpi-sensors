@@ -1,4 +1,10 @@
-import { config, lineChartDataArr, getFields, getFilteredDataArr} from './commonData.js';
+import { 
+  config, 
+  lineChartDataArr, 
+  getFields, 
+  getFilteredDataArr,
+  getColors, 
+} from './commonData.js';
 
 function getProcessedFields(str) {
   let obj = {};
@@ -8,10 +14,13 @@ function getProcessedFields(str) {
   })
 
   return obj;
-};
+}
 
 function getDeltaPlotly(fields, divs) {
-  const dataArr = getFilteredDataArr(fields, lineChartDataArr)
+  const modeOverride = localStorage.getItem('color-mode');
+  const { bgcolor, titlecolor } = getColors(modeOverride, modeOverride);
+  const dataArr = getFilteredDataArr(fields, lineChartDataArr);
+
   dataArr.forEach((data, idx) => {
     const trace1 = {
       x: [],
@@ -37,17 +46,26 @@ function getDeltaPlotly(fields, divs) {
       },
       font: {
         size: 14,
-        color: "#808080",
+        color: titlecolor,
       },
       legend: {
         x: 0,
         y: -1,
       },
       colorway: [data.color],
+      paper_bgcolor: bgcolor,
+      plot_bgcolor: bgcolor,
+      yaxis: {
+        gridcolor: '#808080',
+      },
+      margin: {
+        l: 40,
+        r: 0,
+      },
     };
   
     Plotly.newPlot(divs[idx], traces, layout, config);
   });
-};
+}
 
-export { getProcessedFields, getDeltaPlotly }
+export { getProcessedFields, getDeltaPlotly };

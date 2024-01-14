@@ -10,10 +10,21 @@ class Dht1HistoryView(ListView):
     queryset = Dht1History.objects.order_by("-id")[:10]
     context_object_name = "dht1_history"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = "История DHT22-1"
+        return context
+
+
 class Dht2HistoryView(ListView):
     template_name = "meteo/dht_history.html"
     queryset = Dht2History.objects.order_by("-id")[:10]
     context_object_name = "dht2_history"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = "История DHT22-2"
+        return context
 
 
 class DhtHistoryQuery():

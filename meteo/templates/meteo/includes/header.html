@@ -1,18 +1,48 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/header.css' %}">
+
+{% include 'meteo/includes/icon_arrow.html' %}
 
 <header class="header">
-  <nav class="header__nav">
-    <ul class="header__links">
-        {% for x, y, z in menu %}
-        <li>
-          {% if request.path == y %}
-          <a class="header__link header__link--active" href="{% url x %}">{{ z }}</a>
-        {% else %}
-          <a class="header__link" href="{% url x %}">{{ z }}</a>
-        {% endif %}
-        </li>
+  <a href="/" class="header__logo">
+    <img src="{% static 'images/logo.svg' %}" alt="logo">
+  </a>
+  <nav id="site-navigation" class="site-navigation" aria-label="Main menu">
+    <ul class="main-menu clicky-menu no-js">
+      {% for x, y in nested_menu %}
+      <li>
+        <a href="#">
+          {{ x }}
+          <svg aria-hidden="true" width="16" height="16">
+            <use xlink:href="#arrow" />
+          </svg>
+        </a>
+        <ul>
+          {% for href, link, name in y %}
+          <li><a href="{% url href %}">{{ name }}</a></li>
+          {% endfor %}
+        </ul>
+      </li>
       {% endfor %}
     </ul>
   </nav>
+   
+  <fieldset class="header__switch-box">
+    <div class="switch-group">
+      <input type="radio" name="theme-switch" value="dark" id="toggle-dark" class="theme-switch theme-switch--dark">
+      <label for="toggle-dark" class="theme-label">Темная</label>
+    </div>
+    <div class="switch-group">
+      <input type="radio" name="theme-switch" value="auto" id="toggle-auto" class="theme-switch theme-switch--auto">
+      <label for="toggle-auto" class="theme-label">Системная</label>
+    </div>
+    <div class="switch-group">
+      <input type="radio" name="theme-switch" value="light" id="toggle-light" class="theme-switch theme-switch--light">
+      <label for="toggle-light" class="theme-label">Светлая</label>
+    </div>
+    <script>
+      colorModeOverride 
+        ? document.querySelector(`.theme-switch[value=${colorModeOverride}`).checked = true
+        : document.querySelector(`.theme-switch[value=auto`).checked = true
+    </script>
+  </fieldset>
 </header>

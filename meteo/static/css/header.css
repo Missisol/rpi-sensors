@@ -1,29 +1,252 @@
 .header {
-  display: flex;
   padding: var(--gap) 0;
+  display: grid;
+  grid-template-columns: [logo-start] auto [logo-end menu-start] 1fr [menu-end switch-start] auto [switch-end];
+  grid-template-rows: [top-start] auto [top-end bottom-start] 1fr [bottom-end];
+  align-items: end;
+  row-gap: var(--gap2);
 }
 
-.header__nav {
-  margin-left: auto;
+@media (width < 700px) {
+  .header {
+    padding: var(--gap) 0 var(--gap2);
+  }
 }
 
-.header__links {
+.header__logo {
+  display: inline-block;
+  width: 30px;
+  grid-column: logo;
+  grid-row: top;
+}
+
+@media (width < 700px) {
+  .header__logo {
+    grid-column: logo;
+    grid-row: top;
+  }
+}
+
+/** Theme switch styles */
+.header__switch-box {
   display: flex;
-  flex-wrap: wrap;
-  column-gap: calc(var(--gap) * 2);
-  row-gap: var(--gap);
-  padding: var(--gap) 0;
-}
-
-.header__link {
-  text-decoration: none;
+  max-inline-size: max-content;
+  align-items: flex-start;
   font-family: 'Rubik', sans-serif;
-  font-weight: 500;
-  color: var(--base-grey-color);
+  font-weight: 600;
+  border: 1px solid var(--medium-blue-color);
+  border-radius: 20px;
+  color: var(--medium-grey-color);
+  padding-inline: 0;
+  padding-block: 0;
+  grid-column: switch;
+  grid-row: top;
+  justify-self: end;
 }
 
-.header__link:hover,
-.header__link--active {
+@media (width < 700px) {
+  .header__switch-box {
+    grid-column: -1 / 1;
+    grid-row: top;
+    justify-self: end;
+    align-self: center;
+  }
+}
+
+.switch-group {
+  display: grid;
+  place-items: center;
+  inline-size: max-content;
+  padding: var(--gap-4) var(--gap-2);
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: background-color .1s ease-in;
+}
+
+.switch-group > :is(input, label) {
+  grid-area: 1/1;
+  inline-size: 100%;
+  block-size: 100%;
+  cursor: pointer;
+}
+
+.switch-group > :is(input) {
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.switch-group:hover {
+  color: var(--medium-blue-color);
+}
+
+html[data-force-color-mode=dark]  .switch-group:has(:checked) {
+  color: #fff;
+  border: 1px solid var(--base-blue-color);
+  background-color: var(--base-blue-color);
+}
+
+html[data-force-color-mode=light]  .switch-group:has(:checked) {
+  color: #fff;
+  border: 1px solid var(--medium-blue-color);
+  background-color: var(--medium-blue-color);
+}
+
+@media (prefers-color-scheme: dark) {
+  .switch-group:has(:checked) {
+    color: #fff;
+    border: 1px solid var(--base-blue-color);
+    background-color: var(--base-blue-color);
+  }
+  .switch-group:has(:checked):hover {
+    color: #fff;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .switch-group:has(:checked) {
+    color: #fff;
+    border: 1px solid var(--medium-blue-color);
+    background-color: var(--medium-blue-color);
+  }
+
+  .switch-group:has(:checked):hover {
+    color: #fff;
+  }
+}
+
+.theme-label {
+  font-size: 12px;
+}
+
+/* Dropdown menu */
+.site-navigation {
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  grid-column: menu;
+  grid-row: top;
+}
+
+@media (width < 700px) {
+  .site-navigation {
+    grid-column: 1 / -1;
+    grid-row: bottom;
+  }
+}
+
+.clicky-menu {
+  display: flex;
+  justify-content: stretch;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* General Link & Button Styles */
+.clicky-menu a,
+.clicky-menu button {
+  background: transparent;
+  color: var(--base-grey-color);
+  font-weight: bold;
+  text-decoration: none;
+  font-family: inherit;
+  border-radius: 4px;
+}
+
+.clicky-menu a {
+  padding: var(--gap) var(--gap) var(--gap) var(--gap2);
+ }
+
+.clicky-menu button {
+  margin: var(--gap-4) var(--gap) 0;
+  padding: var(--gap-4) var(--gap) 0;
+}
+
+.clicky-menu a:hover,
+.clicky-menu button:hover {
+  color: var(--medium-blue-color);
+}
+
+.clicky-menu a:focus,
+.clicky-menu button:focus {
   color: var(--base-blue-color);
 }
 
+/* Top Level Items */
+.clicky-menu > li {
+  position: relative;
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: stretch;
+  flex-wrap: wrap;
+}
+
+.clicky-menu > li > a,
+.clicky-menu > li > button {
+  flex: 1 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  border: 0;
+  font-size: inherit;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+/* Icon */
+.clicky-menu svg {
+  width: var(--gap);
+  height: var(--gap);
+  margin-left: var(--gap-2);
+}
+
+.clicky-menu [aria-expanded="true"] svg {
+  transform: scaleY(-1);
+}
+
+/**
+ * Initial state, hidden off screen
+ */
+ .clicky-menu ul {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  visibility: hidden;
+}
+
+/**
+ * No JS fallback
+ *
+ * Triggers menus on hover rather than click. Supports keyboard navigation in modern browsers.
+ */
+.clicky-menu.no-js li:focus-within > ul { 
+  visibility: visible;
+} 
+
+.clicky-menu ul[aria-hidden="false"] {
+  visibility: visible;
+}
+
+/* Submenu Styles */
+.clicky-menu ul {
+  min-width: 100%;
+  width: auto;
+  margin-top: var(--gap-4);
+  padding: 0;
+  list-style: none;
+  background: var(--base-color);
+  border: 1px solid var(--base-blue-color);
+  border-radius: var(--gap-2);
+  z-index: 10;
+}
+
+/* Submenu Links */
+.clicky-menu ul a {
+	display: block;
+}
+
+@media (width < 700px) {
+	.clicky-menu ul a {
+		white-space: nowrap;
+	}
+}
