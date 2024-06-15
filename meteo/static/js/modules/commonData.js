@@ -22,7 +22,7 @@ const getFields = (str) => {
 };
 
 const getDataForLineChart = (dataArr, field) => {
-  return dataArr.map(item => item[field])
+  return dataArr.map(item => Intl.DateTimeFormat('ru_RU', {minute: '2-digit', hour: '2-digit'}).format(new Date(item[field])))
 };
 
 const getFilteredDataArr = (fields, arr) => {
